@@ -18,30 +18,63 @@
     </nav>
 
     <main class="projects-page">
-        <h1>My Projects</h1>
+        <div class="projects-hero">
+            <h1>Projects & Research</h1>
+            <p class="lead-text">Exploring the intersection of cybersecurity and web technologies</p>
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="research">Research</button>
+            </div>
+        </div>
         
         <div class="projects-container">
-            <div class="featured-project">
+            <div class="featured-project reveal" data-category="security">
                 <div class="project-content">
-                    <h2>My India</h2>
-                    <p>A comprehensive tribute to Indian culture and heritage, showcasing the rich diversity and traditions of our nation.</p>
+                    <div class="project-header">
+                        <div class="project-meta">
+                            <span class="project-type">Featured Project</span>
+                            <div class="project-stats">
+                                <span><i class="fas fa-star"></i> Featured</span>
+                                <span><i class="fas fa-code-branch"></i> Open Source</span>
+                            </div>
+                        </div>
+                        <h2>Penetration Testing Framework</h2>
+                    </div>
+                    <div class="project-description">
+                        <p>A comprehensive tribute showcasing India's rich cultural heritage. Built with modern web technologies and optimized for performance.</p>
+                        <ul class="project-highlights">
+                            <li>Responsive design with modern UI/UX principles</li>
+                            <li>Interactive elements and smooth animations</li>
+                            <li>Optimized performance with 95+ PageSpeed score</li>
+                        </ul>
+                    </div>
                     <div class="project-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
+                        <span>HTML5</span>
+                        <span>CSS3</span>
                         <span>JavaScript</span>
+                        <span>Responsive Design</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://loveyouindia.netlify.app/" class="view-live" target="_blank" rel="noopener">View Live</a>
-                        <a href="https://github.com/codewithchiru" class="view-code" target="_blank" rel="noopener">View Code</a>
+                        <a href="https://loveyouindia.netlify.app/" class="btn-primary" target="_blank" rel="noopener">Live Demo</a>
+                        <a href="https://github.com/codewithchiru" class="btn-secondary" target="_blank" rel="noopener">Source Code</a>
                     </div>
                 </div>
                 <div class="project-preview">
-                    <img src="project-preview.jpg" alt="My India Project">
+                    <div class="project-image">
+                        <img src="project-preview.jpg" alt="My India Project">
+                        <div class="tech-stack">
+                            <i class="fab fa-html5" title="HTML5"></i>
+                            <i class="fab fa-css3-alt" title="CSS3"></i>
+                            <i class="fab fa-js" title="JavaScript"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="projects-grid">
-                <!-- Existing project cards -->
+                <!-- Dynamic Projects Grid -->
             </div>
         </div>
     </main>

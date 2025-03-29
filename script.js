@@ -198,3 +198,77 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Project Filter System
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectItems = document.querySelectorAll('[data-category]');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Filter projects
+        projectItems.forEach(item => {
+            if (filter === 'all' || item.dataset.category === filter) {
+                item.style.display = '';
+                setTimeout(() => item.classList.add('show'), 10);
+            } else {
+                item.classList.remove('show');
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Dynamic Project Grid
+const projectsData = [
+    {
+        title: "Security Scanner",
+        description: "Advanced vulnerability assessment tool",
+        category: "security",
+        tech: ["Python", "Docker", "Security"],
+        icon: "shield-alt"
+    },
+    // Add more projects here
+];
+
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.dataset.category = project.category;
+    
+    const icon = document.createElement('i');
+    icon.className = `fas fa-${project.icon}`;
+    card.appendChild(icon);
+    
+    const title = document.createElement('h3');
+    title.textContent = project.title;
+    card.appendChild(title);
+    
+    const description = document.createElement('p');
+    description.textContent = project.description;
+    card.appendChild(description);
+    
+    const techList = document.createElement('ul');
+    project.tech.forEach(tech => {
+        const techItem = document.createElement('li');
+        techItem.textContent = tech;
+        techList.appendChild(techItem);
+    });
+    card.appendChild(techList);
+    
+    return card;
+}
+
+function loadProjects() {
+    const grid = document.querySelector('.projects-grid');
+    projectsData.forEach(project => {
+        grid.appendChild(createProjectCard(project));
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadProjects);
