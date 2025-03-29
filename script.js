@@ -1,9 +1,78 @@
-// Handle project card clicks
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', function() {
-        const link = this.getAttribute('data-link');
-        if (link) window.location.href = link;
+// Add typing animation for the header
+const titles = [
+    "Cyber Security Expert",
+    "Web Developer",
+    "CEH Professional",
+    "Founder of Server Zone"
+];
+
+let titleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+    const typedTextSpan = document.querySelector(".typed-text");
+    const currentTitle = titles[titleIndex];
+    
+    if (isDeleting) {
+        typedTextSpan.textContent = currentTitle.substring(0, charIndex-1);
+        charIndex--;
+    } else {
+        typedTextSpan.textContent = currentTitle.substring(0, charIndex+1);
+        charIndex++;
+    }
+
+    if (!isDeleting && charIndex === currentTitle.length) {
+        setTimeout(() => isDeleting = true, 1500);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        titleIndex = (titleIndex + 1) % titles.length;
+    }
+
+    const typingSpeed = isDeleting ? 100 : 200;
+    setTimeout(typeEffect, typingSpeed);
+}
+
+// Start the typing animation when page loads
+document.addEventListener('DOMContentLoaded', typeEffect);
+
+// Update navigation handling
+document.querySelectorAll('nav a, .cta-primary, .cta-secondary, .view-project, .view-live, .view-code').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        // If it's an external link or email, let it behave normally
+        if (href.startsWith('http') || href.startsWith('mailto:')) {
+            return;
+        }
+        
+        e.preventDefault();
+        
+        // If it's a page navigation
+        if (href.endsWith('.html')) {
+            window.location.href = href;
+            return;
+        }
+        
+        // If it's a section navigation
+        const target = document.querySelector(href);
+        if (target) {
+            target.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start'
+            });
+        }
     });
+});
+
+// Update project card click handling
+document.querySelectorAll('.project-card').forEach(card => {
+    const link = card.getAttribute('data-link');
+    if (link) {
+        card.addEventListener('click', function() {
+            window.location.href = link;
+        });
+    }
 
     card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
@@ -27,15 +96,6 @@ if (featuredProject) {
     });
 }
 
-// Smooth scroll for navigation links
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-});
-
 // Animate skill bars on scroll
 const observerCallback = (entries, observer) => {
     entries.forEach(entry => {
@@ -53,27 +113,49 @@ document.querySelectorAll('.skill-progress').forEach(bar => {
     observer.observe(bar);
 });
 
-// Form handling with validation
-const form = document.querySelector('.contact-form form');
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    
-    try {
-        // Add your form submission logic here
-        const response = await fetch('/submit', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (response.ok) {
-            showNotification('Message sent successfully!', 'success');
+// Add scroll reveal animation
+const revealElements = document.querySelectorAll('.reveal');
+const elementInView = (el, offset = 150) => {
+    const elementTop = el.getBoundingClientRect().top;
+    return elementTop <= window.innerHeight - offset;
+};
+
+const displayScrollElement = (element) => {
+    element.classList.add('revealed');
+};
+
+const hideScrollElement = (element) => {
+    element.classList.remove('revealed');
+};
+
+const handleScrollAnimation = () => {
+    revealElements.forEach((el) => {
+        if (elementInView(el, 150)) {
+            displayScrollElement(el);
         } else {
-            throw new Error('Failed to send message');
+            hideScrollElement(el);
         }
-    } catch (error) {
-        showNotification(error.message, 'error');
-    }
+    });
+}
+
+window.addEventListener('scroll', () => {
+    handleScrollAnimation();
+});
+
+// Update form submission
+document.querySelectorAll('.contact-form form').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        
+        try {
+            // For demonstration, show success message
+            showNotification('Message sent successfully!', 'success');
+            form.reset();
+        } catch (error) {
+            showNotification('Failed to send message', 'error');
+        }
+    });
 });
 
 // Notification system
@@ -87,3 +169,32 @@ function showNotification(message, type) {
         notification.remove();
     }, 3000);
 }
+
+// Add notification styles dynamically
+const style = document.createElement('style');
+style.textContent = `
+    .notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 5px;
+        color: white;
+        z-index: 1000;
+        animation: slideIn 0.5s ease-out;
+    }
+    
+    .notification.success {
+        background-color: #4CAF50;
+    }
+    
+    .notification.error {
+        background-color: #f44336;
+    }
+    
+    @keyframes slideIn {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+    }
+`;
+document.head.appendChild(style);
