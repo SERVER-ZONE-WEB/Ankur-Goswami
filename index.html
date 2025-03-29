@@ -5,201 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ankur Goswami - Cyber Security & Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --text-color: #333;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        nav {
-            background: var(--primary-color);
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--secondary-color);
-        }
-
-        header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/1600x900/?technology');
-            background-size: cover;
-            color: white;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .header-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        section {
-            padding: 5rem 2rem;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-bar {
-            background: #eee;
-            height: 20px;
-            border-radius: 10px;
-            margin-top: 0.5rem;
-        }
-
-        .skill-progress {
-            background: var(--secondary-color);
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1s ease-in-out;
-        }
-
-        .skill-progress-90 {
-            width: 90%;
-        }
-
-        .skill-progress-85 {
-            width: 85%;
-        }
-
-        .skill-progress-75 {
-            width: 75%;
-        }
-
-        .skill-progress-80 {
-            width: 80%;
-        }
-
-        .skill-progress-85 {
-            width: 85%;
-        }
-    
-        .skill-progress-85 {
-            width: 85%;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .portfolio-item-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: 0.3s;
-        }
-
-        .portfolio-item:hover .portfolio-item-content {
-            transform: translateY(0);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--secondary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--primary-color);
-        }
-
-        footer {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .social-links a {
-            color: white;
-            margin: 0 1rem;
-            font-size: 1.5rem;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--secondary-color);
-        }
-    .skill-progress-90 {
-        width: 90%;
-    }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
@@ -207,25 +16,28 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
     <header id="home">
-        <div class="header-content">
+        <div class="header-content" data-aos="fade-up">
             <h1>Ankur Goswami</h1>
             <p>Cyber Security Expert & Web Developer</p>
-            <a href="#contact" class="btn">Get In Touch</a>
+            <div class="links-container">
+                <a href="#projects" class="link-button">View My Work</a>
+                <a href="#contact" class="link-button">Get In Touch</a>
+            </div>
         </div>
     </header>
 
-    <section id="about">
+    <section id="about" data-aos="fade-up">
         <h2>About Me</h2>
         <p>Hi, I'm <b>Ankur Goswami</b> (aka Chiru), a passionate Cyber Security Enthusiast and Web Developer. With expertise in penetration testing and web development, I'm currently pursuing my CEH certification. I'm also the founder of <b>Server Zone</b>, an upcoming IT solutions company.</p>
     </section>
 
-    <section id="skills">
+    <section id="skills" data-aos="fade-up">
         <h2>Skills & Expertise</h2>
                     <div class="skill-progress skill-progress-90"></div>
                     <div class="skill-progress skill-progress-90"></div>
@@ -237,25 +49,69 @@
             <div class="skill">
                 <h3>Cyber Security Analysis</h3>
                 <div class="skill-bar">
-                    <div class="skill-progress" style="width: 85%"></div>
+                    <div class="skill-progress skill-progress-85"></div>
                 </div>
                     <div class="skill-progress skill-progress-80"></div>
             <div class="skill">
                 <h3>Web Development</h3>
                 <div class="skill-bar">
-                    <div class="skill-progress" style="width: 80%"></div>
+                    <div class="skill-progress skill-progress-80"></div>
                 </div>
                     <div class="skill-progress skill-progress-75"></div>
             <div class="skill">
                 <h3>Red Teaming</h3>
                 <div class="skill-bar">
-                    <div class="skill-progress" style="width: 75%"></div>
+                    <div class="skill-progress skill-progress-75"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio">
+    <section id="projects" data-aos="fade-up">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card featured" data-link="https://loveyouindia.netlify.app/">
+                <div class="project-icon"><i class="fas fa-flag"></i></div>
+                <h3>My India</h3>
+                <p>A tribute to Indian culture and heritage</p>
+                <div class="project-tech">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+                <a href="https://loveyouindia.netlify.app/" class="view-project">View Project <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-server"></i></div>
+                <h3>Server Zone</h3>
+                <p>IT Solutions Platform</p>
+                <div class="project-tech">
+                    <span>Full Stack</span>
+                    <span>Security</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Cyber Security Tools</h3>
+                <p>Custom Security Solutions</p>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>Security</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-code"></i></div>
+                <h3>Web Applications</h3>
+                <p>Full-Stack Projects</p>
+                <div class="project-tech">
+                    <span>MERN</span>
+                    <span>AWS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" data-aos="fade-up">
         <h2>Portfolio</h2>
         <div class="portfolio-grid">
             <div class="portfolio-item">
@@ -269,7 +125,7 @@
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" data-aos="fade-up">
         <h2>Contact Me</h2>
         <div class="contact-form">
             <form action="#" method="POST">
@@ -285,9 +141,18 @@
         <div class="social-links">
             <a href="https://github.com/codewithchiru" target="_blank" rel="noopener" title="GitHub Profile"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/" target="_blank" rel="noopener" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:your-email@example.com"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:your-email@example.com" title="Send an Email"><i class="fas fa-envelope"></i></a>
         </div>
         <p>&copy; 2025 Ankur Goswami. All rights reserved.</p>
     </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
