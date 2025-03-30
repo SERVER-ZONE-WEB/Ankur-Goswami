@@ -213,6 +213,27 @@ header::before {
     text-align: center;
     padding: 120px 20px 60px;
     background: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.projects-hero h1 {
+    margin-bottom: 1rem;
+}
+
+.lead-text {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.project-filters {
+    margin-top: 2rem;
 }
 
 .projects-list {
