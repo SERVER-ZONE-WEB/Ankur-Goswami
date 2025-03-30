@@ -346,3 +346,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Glitch effect for hero text
+function glitchEffect() {
+    const glitchText = document.querySelector('.glitch-text');
+    if (!glitchText) return;
+
+    setInterval(() => {
+        glitchText.style.transform = `translate(${Math.random() * 2}px, ${Math.random() * 2}px)`;
+        setTimeout(() => {
+            glitchText.style.transform = 'translate(0, 0)';
+        }, 50);
+    }, 3000);
+}
+
+// Animate stats counter
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const target = parseInt(stat.textContent);
+        let current = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                clearInterval(timer);
+                current = target;
+            }
+            stat.textContent = Math.round(current) + '+';
+        }, 40);
+    });
+}
+
+// Initialize page-specific features
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.hero')) {
+        glitchEffect();
+    }
+    if (document.querySelector('.about-page')) {
+        animateStats();
+    }
+});
