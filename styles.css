@@ -215,6 +215,45 @@ header::before {
     background: var(--secondary-color);
 }
 
+.projects-list {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.project-link {
+    display: block;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-decoration: none;
+    color: #333;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.project-name {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Footer */
 footer {
     background: var(--secondary-color);
@@ -261,4 +300,32 @@ footer {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+.project-category {
+    margin-bottom: 3rem;
+}
+
+.project-category h2 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.project-link {
+    background: var(--secondary-color);
+    color: var(--light-color);
+    border-left: 4px solid var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.project-link:hover {
+    background: var(--primary-color);
+    border-left-width: 8px;
+}
+
+.project-name {
+    color: var(--light-color);
 }

@@ -272,3 +272,77 @@ function loadProjects() {
 }
 
 document.addEventListener('DOMContentLoaded', loadProjects);
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    
+    function reveal() {
+        reveals.forEach(element => {
+            const windowHeight = window.innerHeight;
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < windowHeight - elementVisible) {
+                element.classList.add('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', reveal);
+    reveal(); // Initial check
+    
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectLinks = document.querySelectorAll('.project-link');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            projectLinks.forEach(project => {
+                if (filter === 'all' || project.dataset.category === filter) {
+                    project.style.display = 'block';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCategories = document.querySelectorAll('.project-category');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Show/hide projects based on category
+            projectCategories.forEach(category => {
+                const projects = category.querySelectorAll('.project-link');
+                let hasVisibleProjects = false;
+                
+                projects.forEach(project => {
+                    if (filter === 'all' || project.dataset.category === filter) {
+                        project.style.display = 'block';
+                        hasVisibleProjects = true;
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide category heading
+                category.style.display = hasVisibleProjects ? 'block' : 'none';
+            });
+        });
+    });
+});
