@@ -62,6 +62,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
     max-width: 1200px;
     list-style: none;
@@ -100,6 +101,42 @@ nav ul li a:hover {
 
 nav ul li a:hover::after {
     width: 100%;
+}
+
+.buy-me-book {
+    padding: 0.4rem 0.8rem;
+    background: var(--accent-color);
+    border-radius: 4px;
+    color: var(--primary-color) !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.buy-me-book:hover {
+    transform: translateY(-2px);
+    background: var(--success-color);
+    color: var(--primary-color) !important;
+    box-shadow: 0 4px 12px rgba(0, 255, 148, 0.2);
+}
+
+.buy-me-book i {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .buy-me-book {
+        margin: 1rem auto;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* Header */
