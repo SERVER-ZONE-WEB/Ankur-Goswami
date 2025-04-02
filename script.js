@@ -387,3 +387,89 @@ document.addEventListener('DOMContentLoaded', () => {
         animateStats();
     }
 });
+
+// Company information slideshow
+const companyInfo = [
+    "Server Zone is a leading cybersecurity research and development company.",
+    "We specialize in penetration testing and secure web application development.",
+    "Our team has successfully completed 50+ security projects.",
+    "We provide comprehensive security training and certification programs.",
+    "Server Zone is trusted by leading organizations for security solutions.",
+    "We are committed to making the digital world more secure."
+];
+
+let companyIndex = 0;
+let isTyping = true;
+let textPosition = 0;
+
+function typeCompanyInfo() {
+    const companyText = document.querySelector('.company-text');
+    if (!companyText) return;
+
+    const currentText = companyInfo[companyIndex];
+
+    if (textPosition < currentText.length) {
+        companyText.textContent = currentText.substring(0, textPosition + 1);
+        textPosition++;
+        setTimeout(typeCompanyInfo, 50);
+    } else {
+        setTimeout(() => {
+            textPosition = 0;
+            companyIndex = (companyIndex + 1) % companyInfo.length;
+            companyText.textContent = '';
+            typeCompanyInfo();
+        }, 3000);
+    }
+}
+
+// Initialize company info animation when on about page
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.company-info')) {
+        setTimeout(typeCompanyInfo, 1000);
+    }
+});
+
+// Matrix Effect
+function createMatrixEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const matrixEffect = document.querySelector('.matrix-effect');
+    
+    if (!matrixEffect) return;
+    matrixEffect.appendChild(canvas);
+    
+    canvas.width = matrixEffect.offsetWidth;
+    canvas.height = matrixEffect.offsetHeight;
+    
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
+    const fontSize = 14;
+    const columns = canvas.width/fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+    
+    function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#0F0';
+        ctx.font = fontSize + 'px monospace';
+        
+        for(let i = 0; i < drops.length; i++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+            
+            if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+                drops[i] = 0;
+            
+            drops[i]++;
+        }
+    }
+    
+    setInterval(draw, 33);
+}
+
+// Initialize Matrix Effect
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.hero')) {
+        createMatrixEffect();
+    }
+});

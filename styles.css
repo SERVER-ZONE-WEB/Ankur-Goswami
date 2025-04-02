@@ -505,7 +505,7 @@ copyright {
     width: 3px;
     background-color: var(--accent-color);
     margin-left: 0.1rem;
-    animation: blink 1s infinite;
+    /* Removed blink animation */
 }
 
 /* About Page Styles */
@@ -558,11 +558,135 @@ copyright {
 
 .skill-card {
     background: var(--secondary-color);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 10px;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .skill-card:hover {
     transform: translateY(-5px);
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover::before {
+    transform: scaleX(1);
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.skill-header i {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+}
+
+.skill-list li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.skill-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.company-info {
+    margin: 1.5rem 0;
+    min-height: 100px;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.company-text {
+    display: inline;
+    border-right: none; /* Removed blinking border */
+    padding-right: 3px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: var(--accent-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    width: 50%;
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: 50%;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    left: -8px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -8px;
+}
+
+.timeline-content {
+    padding: 1.5rem;
+    background: var(--secondary-color);
+    border-radius: 8px;
+    margin-left: 2rem;
+}
+
+/* Matrix Effect */
+.matrix-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.1;
 }
