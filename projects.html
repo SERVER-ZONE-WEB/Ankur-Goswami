@@ -15,6 +15,11 @@
         <div class="projects-hero">
             <h1>Projects & Research</h1>
             <p class="lead-text">Exploring the intersection of cybersecurity and web technologies</p>
+            <div class="search-box">
+                <input type="text" id="projectSearch" placeholder="Search projects...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="search-message" id="searchMessage"></div>
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="security">Security</button>
@@ -26,18 +31,35 @@
         <div class="projects-container">
             <div class="projects-list">
                 <!-- Security Tools -->
-                <div class="project-category">
-                    <h2>Security Tools</h2>
-                    <a href="https://github.com/your-repo/pentest-framework" class="project-link reveal" data-category="security">
-                        <span class="project-name">Network Scanner Tool</span>
-                    </a>
-                    <a href="https://github.com/your-repo/security-audit" class="project-link reveal" data-category="security">
-                        <span class="project-name">Password Cracker</span>
-                    </a>
+                <div class="project-category" data-category="security">
+                    <h2><i class="fas fa-shield-alt"></i> Security Tools</h2>
+                    <div class="project-grid">
+                        <div class="project-card reveal" data-category="security">
+                            <div class="project-image">
+                                <img src="images/scanner.jpg" alt="Network Scanner">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="https://github.com/..." target="_blank" rel="noopener" title="GitHub Repository"><i class="fab fa-github"></i></a>
+                                        <a href="#" class="demo-link" title="View Demo"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Network Scanner Tool</h3>
+                                <p>Advanced network vulnerability assessment tool with automated reporting.</p>
+                                <div class="project-tech">
+                                    <span>Python</span>
+                                    <span>Network Security</span>
+                                    <span>Automation</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more security projects -->
+                    </div>
                 </div>
 
                 <!-- Web Applications -->
-                <div class="project-category">
+                <div class="project-category" data-category="web">
                     <h2>Web Applications</h2>
                     <a href="https://myecommerce-app.com" class="project-link reveal" data-category="web">
                         <span class="project-name">E-Commerce Platform</span>
@@ -59,7 +81,7 @@
                 </div>
 
                 <!-- Research Projects -->
-                <div class="project-category">
+                <div class="project-category" data-category="research">
                     <h2>Research</h2>
                     <a href="research/ai-security.pdf" class="project-link reveal" data-category="research">
                         <span class="project-name">AI in Cybersecurity</span>

@@ -238,11 +238,139 @@ header::before {
     flex-wrap: wrap;
 }
 
+/* Project Search Box */
+.search-box {
+    position: relative;
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1.5rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 25px;
+    background: var(--primary-color);
+    color: var(--light-color);
+    font-size: 1rem;
+}
+
+.search-box i {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+}
+
+/* Search Results Message */
+.search-message {
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    border-radius: 8px;
+    display: none;
+}
+
+.search-message.error {
+    border-left: 4px solid var(--danger-color);
+}
+
+.search-message.success {
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Improve search box visibility */
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(0, 255, 148, 0.1);
+}
+
+/* Project Grid Layout */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: var(--secondary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 148, 0.1);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-links a {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+.project-tech {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
 .project-tech span {
-    background: #f0f0f0;
+    background: var(--primary-color);
+    color: var(--accent-color);
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 /* Projects Page */

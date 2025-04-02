@@ -473,3 +473,141 @@ document.addEventListener('DOMContentLoaded', () => {
         createMatrixEffect();
     }
 });
+
+// Project Search Functionality
+const projectSearch = document.getElementById('projectSearch');
+if (projectSearch) {
+    projectSearch.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const projects = document.querySelectorAll('.project-card');
+        
+        projects.forEach(project => {
+            const title = project.querySelector('h3').textContent.toLowerCase();
+            const description = project.querySelector('p').textContent.toLowerCase();
+            const tech = Array.from(project.querySelectorAll('.project-tech span'))
+                .map(span => span.textContent.toLowerCase());
+            
+            const matches = title.includes(searchTerm) || 
+                          description.includes(searchTerm) ||
+                          tech.some(t => t.includes(searchTerm));
+            
+            project.style.display = matches ? 'block' : 'none';
+        });
+    });
+}
+
+// Enhanced Project Search Functionality
+function initProjectSearch() {
+    const projectSearch = document.getElementById('projectSearch');
+    const searchMessage = document.getElementById('searchMessage');
+    
+    if (!projectSearch || !searchMessage) return;
+
+    let searchTimeout;
+
+    projectSearch.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        
+        searchTimeout = setTimeout(() => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            if (searchTerm === '') {
+                showAllProjects();
+                searchMessage.style.display = 'none';
+                return;
+            }
+
+            const projects = document.querySelectorAll('.project-card, .project-link');
+            let matchFound = false;
+            let visibleCount = 0;
+
+            projects.forEach(project => {
+                const title = project.querySelector('.project-name, h3').textContent.toLowerCase();
+                const description = project.querySelector('p')?.textContent.toLowerCase() || '';
+                const tech = Array.from(project.querySelectorAll('.project-tech span'))
+                    .map(span => span.textContent.toLowerCase());
+                
+                const matches = title.includes(searchTerm) || 
+                              description.includes(searchTerm) ||
+                              tech.some(t => t.includes(searchTerm));
+                
+                if (matches) {
+                    project.style.display = 'block';
+                    matchFound = true;
+                    visibleCount++;
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+
+            // Update search message
+            searchMessage.style.display = 'block';
+            if (matchFound) {
+                searchMessage.textContent = `Found ${visibleCount} project${visibleCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
+                searchMessage.className = 'search-message success';
+            } else {
+                searchMessage.textContent = `No projects found matching "${searchTerm}"`;
+                searchMessage.className = 'search-message error';
+            }
+            
+            // Update category visibility
+            updateCategoryVisibility();
+        }, 300); // Debounce search for better performance
+    });
+}
+
+function showAllProjects() {
+    const projects = document.querySelectorAll('.project-card, .project-link');
+    projects.forEach(project => {
+        project.style.display = 'block';
+    });
+    updateCategoryVisibility();
+}
+
+function updateCategoryVisibility() {
+    const categories = document.querySelectorAll('.project-category');
+    categories.forEach(category => {
+        const visibleProjects = category.querySelectorAll('.project-card[style*="display: block"], .project-link[style*="display: block"]');
+        category.style.display = visibleProjects.length > 0 ? 'block' : 'none';
+    });
+}
+
+// Initialize search functionality
+document.addEventListener('DOMContentLoaded', () => {
+    initProjectSearch();
+});
+
+// Project Demo Modal
+document.querySelectorAll('.demo-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const project = e.target.closest('.project-card');
+        const projectTitle = project.querySelector('h3').textContent;
+        
+        showModal(`
+            <div class="demo-modal">
+                <h3>${projectTitle} Demo</h3>
+                <div class="demo-content">
+                    <img src="images/demo-placeholder.jpg" alt="Project Demo">
+                    <p>Live demo coming soon...</p>
+                </div>
+            </div>
+        `);
+    });
+});
+
+function showModal(content) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            ${content}
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.remove();
+    });
+}
