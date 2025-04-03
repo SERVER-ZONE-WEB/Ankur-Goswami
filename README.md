@@ -1,24 +1,51 @@
 # Server Zone - Cybersecurity Portfolio
 
-A professional portfolio website showcasing cybersecurity projects, research, and expertise.
+A modern, responsive portfolio showcasing cybersecurity expertise and projects.
 
-## 🚀 Features
+## 🚀 Quick Start
 
-- Responsive modern design with dark theme
-- Interactive project showcase with filtering and search
-- Matrix effect animation on hero section 
-- Dynamic content loading with error handling
-- Professional platform integrations
-- Contact form with validation
-- SEO optimized
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/SERVER-ZONE-WEB.git
 
-## 🛠️ Technologies Used
+# Navigate to project directory
+cd SERVER-ZONE-WEB/Ankur-Goswami
 
-- HTML5
-- CSS3 with modern features
+# Open with live server or deploy to GitHub Pages
+```
+
+## 🎯 Core Features
+
+- **Component Architecture**
+  - Modular header and footer
+  - Dynamic content loading
+  - Error handling and fallbacks
+
+- **Interactive UI**
+  - Matrix animation background
+  - Typing effect animations
+  - Smooth scrolling navigation
+  - Project filtering and search
+
+- **Responsive Design**
+  - Mobile-first approach
+  - Fluid layouts with CSS Grid
+  - Adaptive components
+  - Custom breakpoints
+
+- **Performance**
+  - Optimized asset loading
+  - Lazy loading images
+  - Minified resources
+  - Smooth animations
+
+## 🛠️ Tech Stack
+
+- HTML5 & CSS3
 - Vanilla JavaScript (ES6+)
 - Font Awesome Icons
 - Google Fonts (Poppins)
+- GitHub Pages
 
 ## 📂 Project Structure
 
@@ -88,6 +115,14 @@ cd server-zone-web
 4. Test across different browsers
 5. Optimize images before committing
 
+## 🚀 Getting Started
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/server-zone-web.git
+cd server-zone-web
+```
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -122,3 +157,22 @@ For any queries or support:
 
 ---
 Made with ❤️ by Ankur Goswami
+
+const basePath = window.location.hostname === 'github.io' 
+    ? '/SERVER-ZONE-WEB' 
+    : '';
+
+:root {
+    --primary-color: #0B1121;
+    --accent-color: #00FF94;
+    --text-color: #8892b0;
+}
+
+This README now better reflects:
+1. Project's technical architecture
+2. Component structure
+3. Key features and implementations
+4. Setup and configuration details
+5. Browser support and responsiveness
+6. Detailed file structure
+7. Development guidelines

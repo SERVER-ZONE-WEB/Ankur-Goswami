@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Show first policy by default
+    showInitialPolicy();
+
+    function showInitialPolicy() {
+        // Show all sections
+        document.querySelectorAll('.policy-section').forEach(section => {
+            section.style.display = 'block';
+        });
+
+        // If hash exists, scroll to it
+        if (window.location.hash) {
+            const targetSection = document.querySelector(window.location.hash);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+
     function showPolicyFromUrl() {
         if (window.location.hash) {
             const policyId = window.location.hash.substring(1);
