@@ -103,28 +103,32 @@ function displayPosts(posts) {
     });
 }
 
-// Filter posts based on search
+// Enhanced filter posts function
 function filterPosts() {
-    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-    const activeCategory = document.querySelector('.category-btn.active').innerText.toLowerCase();
+    const searchTerm = document.getElementById('searchBar').value.toLowerCase().trim();
+    const activeCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
     
-    let filteredPosts = blogPosts;
+    let filteredPosts = [...blogPosts]; // Create a copy of blogPosts array
     
     // Apply category filter if not 'all'
-    if (activeCategory !== 'all') {
+    if (activeCategory && activeCategory !== 'all') {
         filteredPosts = filteredPosts.filter(post => 
-            post.category === activeCategory
+            post.category.toLowerCase() === activeCategory.toLowerCase()
         );
     }
     
-    // Apply search filter
-    filteredPosts = filteredPosts.filter(post => 
-        post.title.toLowerCase().includes(searchTerm) || 
-        post.summary.toLowerCase().includes(searchTerm) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-    );
+    // Apply search filter if search term exists
+    if (searchTerm) {
+        filteredPosts = filteredPosts.filter(post => 
+            post.title.toLowerCase().includes(searchTerm) || 
+            post.summary.toLowerCase().includes(searchTerm) ||
+            post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
+            post.category.toLowerCase().includes(searchTerm)
+        );
+    }
     
     displayPosts(filteredPosts);
+    updateSearchMessage(filteredPosts.length, searchTerm);
 }
 
 // Show individual post
@@ -163,26 +167,35 @@ async function showPost(post) {
 
 // Filter posts by category
 function filterByCategory(category) {
-    // Hide post content if visible
-    document.getElementById('postContent').style.display = 'none';
-    document.getElementById('blogPosts').style.display = 'grid';
-    document.getElementById('searchBar').style.display = 'block';
-    
-    // Filter posts
-    const filteredPosts = category === 'all' 
-        ? blogPosts 
-        : blogPosts.filter(post => post.category === category);
-    
-    // Display filtered posts
-    displayPosts(filteredPosts);
-    
-    // Update active category button
+    // Update active button
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
-        if(btn.innerText.toLowerCase() === category) {
+        if (btn.getAttribute('data-category') === category) {
             btn.classList.add('active');
         }
     });
+    
+    // Apply filters
+    filterPosts();
+}
+
+// Update search results message
+function updateSearchMessage(resultCount, searchTerm) {
+    const searchMessage = document.getElementById('searchMessage');
+    if (!searchMessage) return;
+
+    if (searchTerm) {
+        searchMessage.style.display = 'block';
+        if (resultCount > 0) {
+            searchMessage.textContent = `Found ${resultCount} post${resultCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
+            searchMessage.className = 'search-message success';
+        } else {
+            searchMessage.textContent = `No posts found matching "${searchTerm}"`;
+            searchMessage.className = 'search-message error';
+        }
+    } else {
+        searchMessage.style.display = 'none';
+    }
 }
 
 // Format date
@@ -208,11 +221,26 @@ function sharePost(platform) {
     window.open(urls[platform], '_blank');
 }
 
-// Initialize blog with loading state
+// Initialize event listeners
 document.addEventListener('DOMContentLoaded', () => {
     const blogPostsDiv = document.getElementById('blogPosts');
     if (blogPostsDiv) {
         blogPostsDiv.innerHTML = '<div class="loading">Loading posts...</div>';
         loadPosts();
     }
+
+    // Add search input listener
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) {
+        searchBar.addEventListener('input', debounce(() => {
+            filterPosts();
+        }, 300));
+    }
+
+    // Add category button listeners
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterByCategory(btn.getAttribute('data-category'));
+        });
+    });
 });

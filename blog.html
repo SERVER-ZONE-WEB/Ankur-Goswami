@@ -3,53 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Blog - Ankur Goswami | Security Articles & Web Development</title>
+    <meta name="description" content="Explore in-depth articles on cybersecurity, penetration testing, and web development by Ankur Goswami.">
+    <meta name="keywords" content="cybersecurity, web development, penetration testing, security articles">
+    <meta name="author" content="Ankur Goswami">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Security & Development Blog - Ankur Goswami">
+    <meta property="og:description" content="Expert insights on cybersecurity and web development">
+    <meta property="og:image" content="/images/blog/featured/blog-cover.jpg">
+    
+    <link rel="canonical" href="https://yoursite.com/blog">
     <link rel="stylesheet" href="css/blog.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <base href="/">
-    <meta name="description" content="Explore our latest articles on cybersecurity and web development">
 </head>
 <body>
     <div id="header"></div>
 
     <main>
         <div class="blog-hero">
-            <h1>Our Blog</h1>
-            <p>Stay updated with our latest articles and insights</p>
+            <h1>Latest Security Insights & Articles</h1>
+            <p class="subtitle">Deep dives into cybersecurity, penetration testing, and secure web development</p>
         </div>
 
         <div id="blogContent">
             <!-- Blog list view -->
             <div id="blogList">
                 <div class="blog-filters">
-                    <div class="search-container">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchBar" placeholder="Search blog posts..." onkeyup="filterPosts()">
+                    <div class="blog-search">
+                        <span class="search-text">Blog Search</span>
+                        <input type="text" placeholder="Search blog posts..." class="search-input">
+                        <button class="search-btn" title="Search"><i class="fas fa-search"></i></button>
+                        <button class="mic-btn" title="Activate microphone"><i class="fas fa-microphone"></i></button>
                     </div>
                     
+                                     
                     <div class="categories">
-                        <button class="category-btn active" onclick="filterByCategory('all')">All</button>
-                        <button class="category-btn" onclick="filterByCategory('technology')">Technology</button>
-                        <button class="category-btn" onclick="filterByCategory('web-dev')">Web Development</button>
-                        <button class="category-btn" onclick="filterByCategory('design')">Design</button>
+                        <button class="category-btn active" data-category="all">All</button>
+                        <button class="category-btn" data-category="technology">Technology</button>
+                        <button class="category-btn" data-category="web-dev">Web Development</button>
+                        <button class="category-btn" data-category="design">Design</button>
+                        <button class="category-btn" data-category="security">Security</button>
                     </div>
                 </div>
                 <div id="blogPosts" class="blog-grid">
-                    <div class="loading-spinner">
+                    <div class="loading-spinner" aria-label="Loading blog posts">
                         <i class="fas fa-circle-notch fa-spin"></i>
-                        <p>Loading posts...</p>
+                        <p>Loading articles...</p>
                     </div>
                 </div>
             </div>
 
             <!-- Single post view -->
             <div id="postView" class="hidden">
-                <button class="back-btn" onclick="showBlogList()">
-                    <i class="fas fa-arrow-left"></i> Back to Posts
+                <button class="back-btn" onclick="showBlogList()" aria-label="Back to blog list">
+                    <i class="fas fa-arrow-left"></i> Back to Articles
                 </button>
                 <article id="postContent"></article>
+                <div class="post-navigation">
+                    <button id="prevPost" class="nav-btn" aria-label="Previous post">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button id="nextPost" class="nav-btn" aria-label="Next post">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
@@ -86,5 +107,20 @@
     </script>
     <script src="js/blog.js"></script>
     <script src="js/script.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Ankur Goswami's Security Blog",
+        "description": "Expert articles on cybersecurity and web development",
+        "url": "https://yoursite.com/blog",
+        "author": {
+            "@type": "Person",
+            "name": "Ankur Goswami"
+        }
+    }
+    </script>
 </body>
 </html>
