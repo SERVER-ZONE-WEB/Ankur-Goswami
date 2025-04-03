@@ -1,0 +1,15 @@
+{
+    "posts": [
+        {
+            "id": "post1",
+            "title": "Getting Started with Web Development",
+            "category": "web-dev",
+            "date": "2024-01-15",
+            "author": "Ankur Goswami",
+            "image": "/posts/post1/images/cover.jpg",
+            "summary": "Learn the fundamentals of web development and start your journey.",
+            "path": "/posts/post1/index.html",
+            "tags": ["HTML", "CSS", "JavaScript"]
+        }
+    ]
+}

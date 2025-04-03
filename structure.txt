@@ -3,8 +3,8 @@ SERVER-ZONE-WEB/
     ├── index.html              # Portfolio homepage
     ├── about.html             # About page
     ├── blog.html             # Blog listing and viewer
-    ├── projects.html         # Projects page
-    ├── policies.html         # Policies page
+    ├── projects.html          # Projects page
+    ├── policies.html           # Policies page
     │
     ├── components/           # Reusable components
     │   ├── header.html
