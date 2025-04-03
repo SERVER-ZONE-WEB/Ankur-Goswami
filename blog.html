@@ -4,16 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link rel="stylesheet" href="css/blog.css">  <!-- ✅ Corrected Path -->
+    <link rel="stylesheet" href="css/blog.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <div id="header"></div>
 
     <main>
-        <h1>My Blog</h1>
-        <input type="text" id="searchBar" placeholder="Search blog posts...">
-        <div id="blogPosts"></div>
+        <div class="blog-hero">
+            <h1>Our Blog</h1>
+            <p>Stay updated with our latest articles and insights</p>
+        </div>
+
+        <div class="blog-filters">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchBar" placeholder="Search blog posts..." onkeyup="filterPosts()">
+            </div>
+            
+            <div class="categories">
+                <button class="category-btn active" onclick="filterByCategory('all')">All</button>
+                <button class="category-btn" onclick="filterByCategory('technology')">Technology</button>
+                <button class="category-btn" onclick="filterByCategory('web-dev')">Web Development</button>
+                <button class="category-btn" onclick="filterByCategory('design')">Design</button>
+            </div>
+        </div>
+
+        <div class="featured-post" id="featuredPost"></div>
+        
+        <div id="blogPosts" class="blog-grid"></div>
+
+        <div id="postContent" style="display: none;">
+            <article id="postData"></article>
+            <div class="post-footer">
+                <div class="share-buttons">
+                    <button onclick="sharePost('twitter')"><i class="fab fa-twitter"></i></button>
+                    <button onclick="sharePost('facebook')"><i class="fab fa-facebook"></i></button>
+                    <button onclick="sharePost('linkedin')"><i class="fab fa-linkedin"></i></button>
+                </div>
+                <div class="related-posts" id="relatedPosts"></div>
+            </div>
+        </div>
     </main>
 
-    <script src="js/blog.js"></script>  <!-- ✅ Corrected Path -->
+    <div id="footer"></div>
+    
+    <script>
+        $(document).ready(function() {
+            $("#header").load("components/header.html");
+            $("#footer").load("components/footer.html");
+        });
+    </script>
+    <script src="js/blog.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
