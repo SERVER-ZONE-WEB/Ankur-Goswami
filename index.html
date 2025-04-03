@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="header"></div>
@@ -51,7 +52,12 @@
         </section>
 
         <section id="featured-work" class="section-padding">
-            <!-- Add featured work section -->
+            <div class="container">
+                <h2>Featured Work</h2>
+                <div class="work-grid">
+                    <!-- Add featured projects here -->
+                </div>
+            </div>
         </section>
     </main>
 
@@ -69,6 +75,12 @@
         AOS.init({
             duration: 1000,
             once: true
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#header").load("components/header.html");
+            $("#footer").load("components/footer.html");
         });
     </script>
     <script src="js/script.js"></script>

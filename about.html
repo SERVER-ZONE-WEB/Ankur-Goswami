@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="header"></div>
@@ -95,10 +96,28 @@
             <h2>Get In Touch</h2>
             <div class="contact-container">
                 <div class="contact-info">
+                    <h3>Contact Details</h3>
+                    <p><i class="fas fa-envelope"></i> contact@serverzone.com</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
     <script>
         $(document).ready(function() {
-            $("#header").load("components/header.html");
-            $("#footer").load("components/footer.html");
+            $("#header").load("components/header.html", function(response, status, xhr) {
+                if (status === "error") {
+                    console.error("Error loading header:", xhr.status, xhr.statusText);
+                }
+            });
+            $("#footer").load("components/footer.html", function(response, status, xhr) {
+                if (status === "error") {
+                    console.error("Error loading footer:", xhr.status, xhr.statusText);
+                }
+            });
         });
     </script>
     <script src="js/script.js"></script>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/policies.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="header"></div>
@@ -104,7 +105,12 @@
 
     <div id="footer"></div>
 
-    <script src="components/loadComponents.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#header").load("components/header.html");
+            $("#footer").load("components/footer.html");
+        });
+    </script>
     <script src="js/policies.js"></script>
 </body>
 </html>

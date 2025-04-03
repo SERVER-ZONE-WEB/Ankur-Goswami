@@ -1,6 +1,49 @@
 let blogPosts = [];
 
-// Load posts dynamically
+async function loadBlogList() {
+    try {
+        const response = await fetch('/posts/posts.json');
+        if (!response.ok) throw new Error('Failed to load posts');
+        
+        blogPosts = await response.json();
+        displayPosts(blogPosts);
+        document.getElementById('blogList').style.display = 'block';
+        document.getElementById('postView').style.display = 'none';
+    } catch (error) {
+        showError('Failed to load blog posts');
+    }
+}
+
+async function loadPost(postId) {
+    try {
+        const post = blogPosts.find(p => p.id === postId);
+        if (!post) throw new Error('Post not found');
+        
+        const response = await fetch(`/posts/${postId}/index.html`);
+        if (!response.ok) throw new Error('Failed to load post content');
+        
+        const content = await response.text();
+        document.getElementById('postContent').innerHTML = content;
+        document.getElementById('blogList').style.display = 'none';
+        document.getElementById('postView').style.display = 'block';
+        
+        // Update URL without reload
+        history.pushState({ postId }, post.title, `/blog?post=${postId}`);
+        document.title = `${post.title} - Blog`;
+    } catch (error) {
+        showError('Failed to load post');
+    }
+}
+
+// Handle browser back/forward
+window.addEventListener('popstate', (event) => {
+    if (event.state?.postId) {
+        loadPost(event.state.postId);
+    } else {
+        showBlogList();
+    }
+});
+
 async function loadPosts() {
     try {
         const response = await fetch('./posts/index.json');

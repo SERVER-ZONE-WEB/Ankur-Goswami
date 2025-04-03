@@ -9,6 +9,7 @@ const titles = [
 let titleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
+let typingTimeout;
 
 function typeEffect() {
     const typedTextSpan = document.querySelector(".typed-text");
@@ -30,15 +31,28 @@ function typeEffect() {
     }
 
     const typingSpeed = isDeleting ? 100 : 200;
-    setTimeout(typeEffect, typingSpeed);
+    typingTimeout = setTimeout(typeEffect, typingSpeed);
 }
 
-// Initialize page features
+// Clean up event listeners
+function cleanupEventListeners() {
+    if (typingTimeout) clearTimeout(typingTimeout);
+    window.removeEventListener('scroll', handleScrollDebounced);
+}
+
+// Improved initialization
 document.addEventListener('DOMContentLoaded', () => {
+    const handleScrollDebounced = debounce(handleScroll, 150);
+    window.addEventListener('scroll', handleScrollDebounced);
+
     if (document.querySelector('.hero')) {
         typeEffect();
         createMatrixEffect();
     }
+    
+    // Clean up on page unload
+    window.addEventListener('unload', cleanupEventListeners);
+
     if (document.querySelector('.about-page')) {
         animateStats();
     }
@@ -50,6 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadProjects();
         initProjectSearch();
     }
+    initAboutPage();
+    initBlogFilter();
 });
 
 // Navigation handling
@@ -338,13 +354,16 @@ function glitchEffect() {
     }, 3000);
 }
 
-// Animate stats counter
+// Improved stats animation with cleanup
 function animateStats() {
+    const statTimers = [];
     const stats = document.querySelectorAll('.stat-number');
+    
     stats.forEach(stat => {
         const target = parseInt(stat.textContent);
         let current = 0;
         const increment = target / 50;
+        
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
@@ -353,7 +372,12 @@ function animateStats() {
             }
             stat.textContent = Math.round(current) + '+';
         }, 40);
+        
+        statTimers.push(timer);
     });
+
+    // Cleanup function
+    return () => statTimers.forEach(timer => clearInterval(timer));
 }
 
 // Company information slideshow
@@ -390,7 +414,7 @@ function typeCompanyInfo() {
     }
 }
 
-// Matrix Effect
+// Improved Matrix effect with cleanup
 function createMatrixEffect() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -425,7 +449,15 @@ function createMatrixEffect() {
         }
     }
     
-    setInterval(draw, 33);
+    const drawInterval = setInterval(draw, 33);
+    
+    // Cleanup function
+    return () => {
+        clearInterval(drawInterval);
+        if (canvas && matrixEffect) {
+            matrixEffect.removeChild(canvas);
+        }
+    };
 }
 
 // Enhanced Project Search Functionality
@@ -561,3 +593,39 @@ const ErrorHandler = {
         console.error('Scroll error:', error);
     }
 };
+
+// About page specific animations
+function initAboutPage() {
+    if (!document.querySelector('.about-page')) return;
+
+    // Animate stats
+    animateStats();
+
+    // Company info typing effect
+    typeCompanyInfo();
+
+    // Reveal elements on scroll
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+        revealElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < window.innerHeight - 50) {
+                el.classList.add('active');
+            }
+        });
+    };
+    window.addEventListener('scroll', debounce(revealOnScroll, 50));
+    revealOnScroll();
+}
+
+// Blog search and filter functionality
+function initBlogFilter() {
+    if (!document.querySelector('.blog-page')) return;
+    
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) {
+        searchBar.addEventListener('input', debounce(() => {
+            filterPosts();
+        }, 300));
+    }
+}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="header"></div>
@@ -93,7 +94,12 @@
 
     <div id="footer"></div>
 
-    <script src="components/loadComponents.js"></script>
-    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#header").load("components/header.html");
+            $("#footer").load("components/footer.html");
+        });
+    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

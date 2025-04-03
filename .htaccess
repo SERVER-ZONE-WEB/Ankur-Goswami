@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Redirect /blog/post-slug to /blog?post=post-slug
+RewriteRule ^blog/([^/]+)$ /blog?post=$1 [L,QSA]
