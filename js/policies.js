@@ -1,32 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-    function showPolicy(policyId) {
-        // Hide all policies first
-        document.querySelectorAll('.policy-section').forEach(section => {
-            section.classList.remove('active');
-        });
+    function showPolicyFromUrl() {
+        if (window.location.hash) {
+            const policyId = window.location.hash.substring(1);
+            showPolicy(policyId);
+        }
+    }
 
-        // Show selected policy
+    function showPolicy(policyId) {
+        // Show selected policy immediately
         const selectedPolicy = document.getElementById(policyId);
         if (selectedPolicy) {
-            selectedPolicy.classList.add('active');
+            // Hide all policies first
+            document.querySelectorAll('.policy-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected policy
+            selectedPolicy.style.display = 'block';
             selectedPolicy.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
-    // Handle initial load with hash
-    if (window.location.hash) {
-        const policyId = window.location.hash.substring(1);
-        showPolicy(policyId);
-    } else {
-        // If no hash, show first policy by default
-        showPolicy('privacy-policy');
-    }
+    // Show policy on page load
+    showPolicyFromUrl();
 
     // Handle clicks on policy links
-    document.querySelectorAll('.policy-link').forEach(link => {
-        link.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.policy-link')) {
+            const link = e.target.closest('.policy-link');
             const policyId = link.getAttribute('href').split('#')[1];
             showPolicy(policyId);
-        });
+        }
     });
+
+    // Handle browser back/forward
+    window.addEventListener('hashchange', showPolicyFromUrl);
 });

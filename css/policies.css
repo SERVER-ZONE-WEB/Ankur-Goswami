@@ -8,7 +8,7 @@
 }
 
 .policy-section {
-    display: none; /* Hide by default */
+    display: none;  /* Hide sections by default */
     scroll-margin-top: 80px;
     background: var(--secondary-color);
     border-radius: 10px;
