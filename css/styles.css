@@ -48,14 +48,14 @@ p {
 /* Navigation */
 nav {
     background: rgba(10, 25, 47, 0.85);
-    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    padding: 1.5rem;
+    height: 45px; /* Reduced height */
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
 }
 
 nav ul {
@@ -63,10 +63,9 @@ nav ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-    max-width: 1200px;
-    list-style: none;
-    margin: 0 auto;
+    gap: 1.5rem; /* Reduced gap */
+    width: 100%;
+    margin: 0;
 }
 
 nav ul li {
@@ -104,19 +103,19 @@ nav ul li a:hover::after {
 }
 
 .buy-me-book {
-    padding: 0.3rem 0.6rem;  /* Reduced padding */
+    padding: 0.25rem 0.5rem; /* Smaller padding */
+    font-size: 0.75rem; /* Smaller font */
+    gap: 0.2rem; /* Smaller gap */
     background: var(--accent-color);
     border-radius: 4px;
     color: var(--primary-color) !important;
     font-family: 'Poppins', sans-serif;
-    font-size: 0.8rem;       /* Reduced font size */
     font-weight: 500;
     text-decoration: none;
     border: none;
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;            /* Reduced gap */
     letter-spacing: 0.5px;
 }
 
@@ -128,7 +127,7 @@ nav ul li a:hover::after {
 }
 
 .buy-me-book i {
-    font-size: 0.8rem;      /* Reduced icon size */
+    font-size: 0.75rem; /* Smaller icon */
 }
 
 @media (max-width: 768px) {
@@ -926,7 +925,7 @@ copyright {
 
 .error-component button:hover {
     background: var(--danger-color);
-    color: var(--light-color);
+    color: var (--light-color);
 }
 
 /* Loading State Styles */
