@@ -36,13 +36,13 @@
         
         <div id="blogPosts" class="blog-grid"></div>
 
-        <div id="postContent" style="display: none;">
+        <div id="postContent" class="hidden">
             <article id="postData"></article>
             <div class="post-footer">
                 <div class="share-buttons">
-                    <button onclick="sharePost('twitter')"><i class="fab fa-twitter"></i></button>
-                    <button onclick="sharePost('facebook')"><i class="fab fa-facebook"></i></button>
-                    <button onclick="sharePost('linkedin')"><i class="fab fa-linkedin"></i></button>
+                    <button onclick="sharePost('twitter')" title="Share on Twitter"><i class="fab fa-twitter"></i></button>
+                    <button onclick="sharePost('facebook')" title="Share on Facebook"><i class="fab fa-facebook"></i></button>
+                    <button onclick="sharePost('linkedin')" title="Share on LinkedIn"><i class="fab fa-linkedin"></i></button>
                 </div>
                 <div class="related-posts" id="relatedPosts"></div>
             </div>
@@ -52,9 +52,19 @@
     <div id="footer"></div>
     
     <script>
+        // Error handling for component loading
         $(document).ready(function() {
-            $("#header").load("components/header.html");
-            $("#footer").load("components/footer.html");
+            const loadComponent = (id, path) => {
+                $(`#${id}`).load(path, function(response, status, xhr) {
+                    if (status === "error") {
+                        console.error(`Error loading ${path}: ${xhr.status} ${xhr.statusText}`);
+                        $(`#${id}`).html(`<div class="error">Failed to load component</div>`);
+                    }
+                });
+            };
+
+            loadComponent("header", "components/header.html");
+            loadComponent("footer", "components/footer.html");
         });
     </script>
     <script src="js/blog.js"></script>

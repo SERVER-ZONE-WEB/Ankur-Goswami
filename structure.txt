@@ -1,9 +1,14 @@
 SERVER-ZONE-WEB/
-├── posts/                     # 📂 Individual Blog Posts (Each post will have its own HTML file)
-│   ├── post1.html
-│   ├── post2.html
-│   ├── post3.html
-│   └── ...more posts
+├── posts/
+│   ├── index.json
+│   ├── post1/
+│   │   ├── post.html
+│   │   ├── cover.jpg
+│   │   └── images/
+│   └── post2/
+│       ├── post.html │       
+│       ├── cover.jpg │       
+│       └── images/
 │
 ├── components/                       # 📂 Common Components
 │   ├── header.html

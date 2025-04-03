@@ -33,10 +33,26 @@ function typeEffect() {
     setTimeout(typeEffect, typingSpeed);
 }
 
-// Start the typing animation when page loads
-document.addEventListener('DOMContentLoaded', typeEffect);
+// Initialize page features
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.hero')) {
+        typeEffect();
+        createMatrixEffect();
+    }
+    if (document.querySelector('.about-page')) {
+        animateStats();
+    }
+    if (document.querySelector('.company-info')) {
+        setTimeout(typeCompanyInfo, 1000);
+    }
+    // Only initialize project-specific features if on projects page
+    if (document.querySelector('.projects-grid')) {
+        loadProjects();
+        initProjectSearch();
+    }
+});
 
-// Update navigation handling
+// Navigation handling
 document.querySelectorAll('nav a, .cta-primary, .cta-secondary, .view-project, .view-live, .view-code').forEach(link => {
     link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -309,82 +325,6 @@ function loadProjects() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadProjects);
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Reveal animation
-    const reveals = document.querySelectorAll('.reveal');
-    
-    function reveal() {
-        reveals.forEach(element => {
-            const windowHeight = window.innerHeight;
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-            
-            if (elementTop < windowHeight - elementVisible) {
-                element.classList.add('active');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', reveal);
-    reveal(); // Initial check
-    
-    // Filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectLinks = document.querySelectorAll('.project-link');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
-            
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            projectLinks.forEach(project => {
-                if (filter === 'all' || project.dataset.category === filter) {
-                    project.style.display = 'block';
-                } else {
-                    project.style.display = 'none';
-                }
-            });
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCategories = document.querySelectorAll('.project-category');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
-            
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            // Show/hide projects based on category
-            projectCategories.forEach(category => {
-                const projects = category.querySelectorAll('.project-link');
-                let hasVisibleProjects = false;
-                
-                projects.forEach(project => {
-                    if (filter === 'all' || project.dataset.category === filter) {
-                        project.style.display = 'block';
-                        hasVisibleProjects = true;
-                    } else {
-                        project.style.display = 'none';
-                    }
-                });
-                
-                // Show/hide category heading
-                category.style.display = hasVisibleProjects ? 'block' : 'none';
-            });
-        });
-    });
-});
-
 // Glitch effect for hero text
 function glitchEffect() {
     const glitchText = document.querySelector('.glitch-text');
@@ -415,16 +355,6 @@ function animateStats() {
         }, 40);
     });
 }
-
-// Initialize page-specific features
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.hero')) {
-        glitchEffect();
-    }
-    if (document.querySelector('.about-page')) {
-        animateStats();
-    }
-});
 
 // Company information slideshow
 const companyInfo = [
@@ -459,13 +389,6 @@ function typeCompanyInfo() {
         }, 3000);
     }
 }
-
-// Initialize company info animation when on about page
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.company-info')) {
-        setTimeout(typeCompanyInfo, 1000);
-    }
-});
 
 // Matrix Effect
 function createMatrixEffect() {
@@ -503,35 +426,6 @@ function createMatrixEffect() {
     }
     
     setInterval(draw, 33);
-}
-
-// Initialize Matrix Effect
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.hero')) {
-        createMatrixEffect();
-    }
-});
-
-// Project Search Functionality
-const projectSearch = document.getElementById('projectSearch');
-if (projectSearch) {
-    projectSearch.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        const projects = document.querySelectorAll('.project-card');
-        
-        projects.forEach(project => {
-            const title = project.querySelector('h3').textContent.toLowerCase();
-            const description = project.querySelector('p').textContent.toLowerCase();
-            const tech = Array.from(project.querySelectorAll('.project-tech span'))
-                .map(span => span.textContent.toLowerCase());
-            
-            const matches = title.includes(searchTerm) || 
-                          description.includes(searchTerm) ||
-                          tech.some(t => t.includes(searchTerm));
-            
-            project.style.display = matches ? 'block' : 'none';
-        });
-    });
 }
 
 // Enhanced Project Search Functionality
@@ -620,11 +514,6 @@ function updateCategoryVisibility() {
     });
 }
 
-// Initialize search functionality
-document.addEventListener('DOMContentLoaded', () => {
-    initProjectSearch();
-});
-
 // Project Demo Modal
 document.querySelectorAll('.demo-link').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -660,3 +549,15 @@ function showModal(content) {
         modal.remove();
     });
 }
+
+// Error handling utility
+const ErrorHandler = {
+    showError(message) {
+        console.error(message);
+        showNotification(message, 'error');
+    },
+    handleScrollError(error) {
+        this.showError('Error loading content');
+        console.error('Scroll error:', error);
+    }
+};

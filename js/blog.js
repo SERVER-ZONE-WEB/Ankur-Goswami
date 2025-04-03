@@ -1,48 +1,18 @@
-// Sample blog posts data
-const blogPosts = [
-    {
-        id: 1,
-        title: "Getting Started with Web Development",
-        category: "web-dev",
-        date: "2024-01-15",
-        author: "John Doe",
-        image: "images/blog/web-dev.jpg",
-        summary: "Learn the fundamentals of web development and start your journey.",
-        content: `<div class="post-content">
-            <img src="images/blog/web-dev.jpg" alt="Web Development">
-            <p>Complete guide to start web development...</p>
-        </div>`,
-        tags: ["HTML", "CSS", "JavaScript"]
-    },
-    {
-        id: 2,
-        title: "UI/UX Design Principles",
-        category: "design",
-        date: "2024-01-20",
-        author: "Jane Smith",
-        image: "images/blog/design.jpg",
-        summary: "Essential principles of UI/UX design.",
-        content: `<div class="post-content">
-            <img src="images/blog/design.jpg" alt="UI/UX Design">
-            <p>Learn about modern design principles...</p>
-        </div>`,
-        tags: ["UI", "UX", "Design"]
-    },
-    {
-        id: 3,
-        title: "Latest Tech Trends 2024",
-        category: "technology",
-        date: "2024-01-25",
-        author: "Mike Johnson",
-        image: "images/blog/tech.jpg",
-        summary: "Explore the latest technology trends.",
-        content: `<div class="post-content">
-            <img src="images/blog/tech.jpg" alt="Technology">
-            <p>Discover emerging technologies...</p>
-        </div>`,
-        tags: ["AI", "Blockchain", "IoT"]
+let blogPosts = [];
+
+// Load posts dynamically
+async function loadPosts() {
+    try {
+        const response = await fetch('./posts/index.json');
+        if (!response.ok) throw new Error('Failed to load posts index');
+        
+        blogPosts = await response.json();
+        displayPosts(blogPosts);
+    } catch (error) {
+        console.error('Error loading blog posts:', error);
+        showNotification('Failed to load blog posts', 'error');
     }
-];
+}
 
 // Display blog posts
 function displayPosts(posts) {
@@ -116,13 +86,45 @@ function filterPosts() {
 
 // Show individual post
 function showPost(post) {
-    document.getElementById('blogPosts').style.display = 'grid';
-    document.getElementById('searchBar').style.display = 'block';
+    if (!post) return;
     
-    document.getElementById('postData').innerHTML = `
-        <h1>${post.title}</h1>
-        <div>${post.content}</div>
-    `;
+    const blogPosts = document.getElementById('blogPosts');
+    const postContent = document.getElementById('postContent');
+    const searchBar = document.getElementById('searchBar');
+    const categories = document.querySelector('.categories');
+    const featuredPost = document.getElementById('featuredPost');
+
+    // Fade out blog elements
+    [blogPosts, searchBar, categories, featuredPost].forEach(el => {
+        if (el) {
+            el.style.opacity = '0';
+            setTimeout(() => el.style.display = 'none', 300);
+        }
+    });
+
+    // Update post content
+    setTimeout(() => {
+        document.getElementById('postData').innerHTML = `
+            <article class="full-post">
+                <header class="post-header">
+                    <h1>${post.title}</h1>
+                    <div class="post-meta">
+                        <span><i class="far fa-user"></i> ${post.author}</span>
+                        <span><i class="far fa-calendar"></i> ${formatDate(post.date)}</span>
+                        <span class="category">${post.category}</span>
+                    </div>
+                </header>
+                ${post.content}
+                <div class="tags">
+                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            </article>
+        `;
+
+        // Fade in post content
+        postContent.style.display = 'block';
+        setTimeout(() => postContent.style.opacity = '1', 50);
+    }, 300);
 }
 
 // Filter posts by category
@@ -172,7 +174,11 @@ function sharePost(platform) {
     window.open(urls[platform], '_blank');
 }
 
-// Initialize blog
+// Initialize blog with loading state
 document.addEventListener('DOMContentLoaded', () => {
-    displayPosts(blogPosts);
+    const blogPostsDiv = document.getElementById('blogPosts');
+    if (blogPostsDiv) {
+        blogPostsDiv.innerHTML = '<div class="loading">Loading posts...</div>';
+        loadPosts();
+    }
 });
