@@ -1,16 +1,38 @@
 // Function to load HTML components
 async function loadComponent(elementId, componentPath) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
     try {
         const response = await fetch(componentPath);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
+        element.innerHTML = html;
     } catch (error) {
-        console.error('Error loading component:', error);
+        element.innerHTML = ErrorHandler.handleComponentError(error, elementId);
     }
 }
 
-// Load components when DOM is ready
+// Enhanced component loading with retries
+async function loadComponentWithRetry(elementId, componentPath, maxRetries = 3) {
+    let retries = 0;
+    while (retries < maxRetries) {
+        try {
+            await loadComponent(elementId, componentPath);
+            return;
+        } catch (error) {
+            retries++;
+            if (retries === maxRetries) {
+                ErrorHandler.showError(`Failed to load ${elementId} after ${maxRetries} attempts`);
+            }
+            await new Promise(resolve => setTimeout(resolve, 1000 * retries));
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('header', '/components/header.html');
-    loadComponent('footer', '/components/footer.html');
+    loadComponentWithRetry('header', '/components/header.html');
+    loadComponentWithRetry('footer', '/components/footer.html');
 });

@@ -142,6 +142,44 @@ window.addEventListener('scroll', () => {
     handleScrollAnimation();
 });
 
+// Enhanced scroll handling
+let isLoading = false;
+let hasMoreContent = true;
+
+async function handleScroll() {
+    if (isLoading || !hasMoreContent) return;
+
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const documentHeight = document.documentElement.offsetHeight;
+
+    if (scrollPosition >= documentHeight - 1000) {
+        try {
+            isLoading = true;
+            await loadMoreContent();
+        } catch (error) {
+            ErrorHandler.handleScrollError(error);
+            hasMoreContent = false;
+        } finally {
+            isLoading = false;
+        }
+    }
+}
+
+// Debounced scroll handler
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+window.addEventListener('scroll', debounce(handleScroll, 150));
+
 // Update form submission
 document.querySelectorAll('.contact-form form').forEach(form => {
     form.addEventListener('submit', async (e) => {
@@ -501,58 +539,69 @@ function initProjectSearch() {
     const projectSearch = document.getElementById('projectSearch');
     const searchMessage = document.getElementById('searchMessage');
     
-    if (!projectSearch || !searchMessage) return;
+    if (!projectSearch || !searchMessage) {
+        ErrorHandler.showError('Search functionality unavailable');
+        return;
+    }
 
     let searchTimeout;
 
     projectSearch.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        
-        searchTimeout = setTimeout(() => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            if (searchTerm === '') {
-                showAllProjects();
-                searchMessage.style.display = 'none';
-                return;
-            }
-
-            const projects = document.querySelectorAll('.project-card, .project-link');
-            let matchFound = false;
-            let visibleCount = 0;
-
-            projects.forEach(project => {
-                const title = project.querySelector('.project-name, h3').textContent.toLowerCase();
-                const description = project.querySelector('p')?.textContent.toLowerCase() || '';
-                const tech = Array.from(project.querySelectorAll('.project-tech span'))
-                    .map(span => span.textContent.toLowerCase());
-                
-                const matches = title.includes(searchTerm) || 
-                              description.includes(searchTerm) ||
-                              tech.some(t => t.includes(searchTerm));
-                
-                if (matches) {
-                    project.style.display = 'block';
-                    matchFound = true;
-                    visibleCount++;
-                } else {
-                    project.style.display = 'none';
-                }
-            });
-
-            // Update search message
-            searchMessage.style.display = 'block';
-            if (matchFound) {
-                searchMessage.textContent = `Found ${visibleCount} project${visibleCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
-                searchMessage.className = 'search-message success';
-            } else {
-                searchMessage.textContent = `No projects found matching "${searchTerm}"`;
-                searchMessage.className = 'search-message error';
-            }
-            
-            // Update category visibility
-            updateCategoryVisibility();
-        }, 300); // Debounce search for better performance
+        try {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                performSearch(searchTerm, searchMessage);
+            }, 300);
+        } catch (error) {
+            ErrorHandler.showError('Search error occurred');
+            console.error('Search error:', error);
+        }
     });
+}
+
+function performSearch(searchTerm, searchMessage) {
+    if (searchTerm === '') {
+        showAllProjects();
+        searchMessage.style.display = 'none';
+        return;
+    }
+
+    const projects = document.querySelectorAll('.project-card, .project-link');
+    let matchFound = false;
+    let visibleCount = 0;
+
+    projects.forEach(project => {
+        const title = project.querySelector('.project-name, h3').textContent.toLowerCase();
+        const description = project.querySelector('p')?.textContent.toLowerCase() || '';
+        const tech = Array.from(project.querySelectorAll('.project-tech span'))
+            .map(span => span.textContent.toLowerCase());
+        
+        const matches = title.includes(searchTerm) || 
+                      description.includes(searchTerm) ||
+                      tech.some(t => t.includes(searchTerm));
+        
+        if (matches) {
+            project.style.display = 'block';
+            matchFound = true;
+            visibleCount++;
+        } else {
+            project.style.display = 'none';
+        }
+    });
+
+    // Update search message
+    searchMessage.style.display = 'block';
+    if (matchFound) {
+        searchMessage.textContent = `Found ${visibleCount} project${visibleCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
+        searchMessage.className = 'search-message success';
+    } else {
+        searchMessage.textContent = `No projects found matching "${searchTerm}"`;
+        searchMessage.className = 'search-message error';
+    }
+    
+    // Update category visibility
+    updateCategoryVisibility();
 }
 
 function showAllProjects() {

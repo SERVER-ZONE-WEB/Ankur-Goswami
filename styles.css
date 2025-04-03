@@ -896,3 +896,47 @@ copyright {
     pointer-events: none;
     opacity: 0.1;
 }
+
+/* Error Component Styles */
+.error-component {
+    background: var(--secondary-color);
+    border-left: 4px solid var(--danger-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.error-component i {
+    color: var(--danger-color);
+    font-size: 1.5rem;
+}
+
+.error-component button {
+    background: var(--accent-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.error-component button:hover {
+    background: var(--danger-color);
+    color: var(--light-color);
+}
+
+/* Loading State Styles */
+.loading-indicator {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--accent-color);
+}
+
+.loading-indicator i {
+    animation: spin 1s linear infinite;
+}
