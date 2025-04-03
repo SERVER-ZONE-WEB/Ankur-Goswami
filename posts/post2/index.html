@@ -3,95 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn Web Development with the latest trends and technologies. HTML, CSS, JavaScript, and more.">
-    <meta name="keywords" content="Web Development, HTML, CSS, JavaScript, Frontend, Backend">
+    <meta name="description" content="Comprehensive Guide to Web Development - Learn HTML, CSS, and JavaScript with practical examples.">
+    <meta name="keywords" content="Web Development, HTML, CSS, JavaScript, Frontend, Backend, Full Stack">
     <meta name="author" content="Ankur Goswami">
-    <title>Web Development Guide</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Ultimate Guide to Web Development</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: #f4f4f4;
+            color: #333;
         }
         .container {
-            width: 60%;
-            margin: 30px auto;
-            background: #fff;
+            width: 80%;
+            margin: auto;
             padding: 20px;
+            background: white;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            border-radius: 8px;
+        }
+        header {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
         }
         h1 {
             text-align: center;
-            color: #333;
         }
-        .meta {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .blog-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .content {
-            text-align: justify;
-            line-height: 1.8;
-        }
-        .buttons {
+        .like-share {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-top: 20px;
         }
-        .like, .share {
+        .like-share button {
             background: #007bff;
-            color: #fff;
+            color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px 15px;
             cursor: pointer;
             border-radius: 5px;
         }
-        .like:hover, .share:hover {
+        .like-share button:hover {
             background: #0056b3;
-        }
-        .count {
-            font-size: 18px;
-            margin-left: 10px;
-            color: #333;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Ultimate Guide to Web Development</h1>
+    </header>
     <div class="container">
-        <h1>Complete Web Development Guide</h1>
-        <p class="meta">By Ankur Goswami | February 20, 2025</p>
-        <img src="https://source.unsplash.com/800x400/?technology,computer" class="blog-image" alt="Web Development">
-        <div class="content">
-            <p>Web development is a constantly evolving field that requires keeping up with the latest technologies and frameworks. In this guide, we will cover the basics of HTML, CSS, and JavaScript, along with some advanced topics like responsive design, SEO, and modern frameworks.</p>
-            <h2>1. Understanding HTML</h2>
-            <p>HTML (HyperText Markup Language) is the backbone of web pages. It provides the structure and content of a webpage.</p>
-            <h2>2. Styling with CSS</h2>
-            <p>CSS (Cascading Style Sheets) is used to style and layout web pages, including colors, fonts, and animations.</p>
-            <h2>3. JavaScript for Interactivity</h2>
-            <p>JavaScript allows you to create dynamic and interactive experiences for users, from animations to form validation.</p>
-        </div>
-        <div class="buttons">
-            <button class="like" onclick="likePost()"><i class="fa fa-thumbs-up"></i> Like <span class="count" id="likeCount">0</span></button>
-            <button class="share" onclick="sharePost()"><i class="fa fa-share"></i> Share</button>
+        <h2>Introduction</h2>
+        <p>Web development is an essential skill in today's digital world. Whether you want to build your own website or become a professional web developer, learning HTML, CSS, and JavaScript is the first step.</p>
+        
+        <h2>1. Understanding HTML</h2>
+        <p>HTML (Hypertext Markup Language) is the foundation of any webpage. It structures the content and elements of a site.</p>
+        
+        <pre>
+            <code>
+                &lt;!DOCTYPE html&gt;
+                &lt;html&gt;
+                &lt;head&gt;
+                    &lt;title&gt;My First Webpage&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </code>
+        </pre>
+        
+        <h2>2. Styling with CSS</h2>
+        <p>CSS (Cascading Style Sheets) is used to style the HTML elements, making the website visually appealing.</p>
+        
+        <pre>
+            <code>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                }
+                h1 {
+                    color: blue;
+                    text-align: center;
+                }
+            </code>
+        </pre>
+        
+        <h2>3. Adding JavaScript</h2>
+        <p>JavaScript adds interactivity to web pages, such as button clicks and animations.</p>
+        
+        <pre>
+            <code>
+                document.getElementById("btn").addEventListener("click", function() {
+                    alert("Button Clicked!");
+                });
+            </code>
+        </pre>
+        
+        <h2>Conclusion</h2>
+        <p>Web development is a journey that starts with HTML, CSS, and JavaScript. Keep learning and practicing to master it!</p>
+        
+        <div class="like-share">
+            <button id="likeBtn">Like (0)</button>
+            <button onclick="sharePost()">Share</button>
         </div>
     </div>
+    
     <script>
-        let likeCount = 0;
-        function likePost() {
-            likeCount++;
-            document.getElementById("likeCount").textContent = likeCount;
-        }
+        let likes = 0;
+        document.getElementById("likeBtn").addEventListener("click", function() {
+            likes++;
+            this.innerText = "Like (" + likes + ")";
+        });
         function sharePost() {
-            alert("Post shared successfully!");
+            alert("Post Shared!");
         }
     </script>
 </body>
