@@ -1,3 +1,14 @@
+// Add at the beginning of the file
+function getBasePath() {
+    return window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
+}
+
+// Use this function when loading resources
+function getResourcePath(path) {
+    const basePath = getBasePath();
+    return `${basePath}${path}`;
+}
+
 // Add typing animation for the header
 const titles = [
     "Cyber Security Expert",

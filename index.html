@@ -195,8 +195,21 @@
     </script>
     <script>
         $(document).ready(function() {
-            $("#header").load("components/header.html");
-            $("#footer").load("components/footer.html");
+            // Get base path for GitHub Pages
+            const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
+            
+            // Load components with corrected paths
+            $("#header").load(`${basePath}/components/header.html`, function(response, status, xhr) {
+                if (status === "error") {
+                    console.error("Error loading header:", xhr.status, xhr.statusText);
+                }
+            });
+            
+            $("#footer").load(`${basePath}/components/footer.html`, function(response, status, xhr) {
+                if (status === "error") {
+                    console.error("Error loading footer:", xhr.status, xhr.statusText);
+                }
+            });
         });
     </script>
     <script src="js/script.js"></script>
