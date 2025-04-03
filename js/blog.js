@@ -85,46 +85,37 @@ function filterPosts() {
 }
 
 // Show individual post
-function showPost(post) {
+async function showPost(post) {
     if (!post) return;
     
-    const blogPosts = document.getElementById('blogPosts');
-    const postContent = document.getElementById('postContent');
-    const searchBar = document.getElementById('searchBar');
-    const categories = document.querySelector('.categories');
-    const featuredPost = document.getElementById('featuredPost');
+    try {
+        // Load post content from HTML file
+        const response = await fetch(post.path);
+        if (!response.ok) throw new Error('Failed to load post content');
+        const postContent = await response.text();
+        
+        // Hide blog list elements
+        const elementsToHide = ['blogPosts', 'searchBar', 'categories', 'featuredPost'];
+        elementsToHide.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.opacity = '0';
+                setTimeout(() => element.style.display = 'none', 300);
+            }
+        });
 
-    // Fade out blog elements
-    [blogPosts, searchBar, categories, featuredPost].forEach(el => {
-        if (el) {
-            el.style.opacity = '0';
-            setTimeout(() => el.style.display = 'none', 300);
-        }
-    });
-
-    // Update post content
-    setTimeout(() => {
-        document.getElementById('postData').innerHTML = `
-            <article class="full-post">
-                <header class="post-header">
-                    <h1>${post.title}</h1>
-                    <div class="post-meta">
-                        <span><i class="far fa-user"></i> ${post.author}</span>
-                        <span><i class="far fa-calendar"></i> ${formatDate(post.date)}</span>
-                        <span class="category">${post.category}</span>
-                    </div>
-                </header>
-                ${post.content}
-                <div class="tags">
-                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-            </article>
-        `;
-
-        // Fade in post content
-        postContent.style.display = 'block';
-        setTimeout(() => postContent.style.opacity = '1', 50);
-    }, 300);
+        // Show post content
+        setTimeout(() => {
+            document.getElementById('postData').innerHTML = postContent;
+            const postContent = document.getElementById('postContent');
+            postContent.style.display = 'block';
+            setTimeout(() => postContent.style.opacity = '1', 50);
+        }, 300);
+        
+    } catch (error) {
+        console.error('Error loading post:', error);
+        showNotification('Failed to load post content', 'error');
+    }
 }
 
 // Filter posts by category

@@ -2,8 +2,9 @@ SERVER-ZONE-WEB/
 └── Ankur-Goswami/
     ├── index.html              # Portfolio homepage
     ├── about.html             # About page
-    ├── blog.html             # Blog page (with dynamic post loading)
-    ├── contact.html          # Contact page
+    ├── blog.html             # Blog listing and viewer
+    ├── projects.html         # Projects page
+    ├── policies.html         # Policies page
     │
     ├── components/           # Reusable components
     │   ├── header.html
@@ -17,13 +18,24 @@ SERVER-ZONE-WEB/
     │   ├── script.js        # Main JavaScript
     │   └── blog.js          # Blog functionality
     │
-    ├── posts/              # Blog posts data and content
-    │   ├── index.json      # Posts metadata and content
-    │   └── images/         # Blog post images
-    │       ├── post1/
-    │       └── post2/
+    ├── posts/              # Blog posts
+    │   ├── post1/
+    │   │   ├── index.html
+    │   │   └── images/     # Post specific images
+    │   └── post2/
+    │       ├── index.html
+    │       └── images/
     │
-    └── images/
-        ├── projects/       # Project images
-        ├── gallery/        # Portfolio gallery
-        └── icons/         # UI icons and logos
+    └── images/            # All website images
+        ├── blog/         # Blog related images
+        │   ├── featured/ # Featured blog images
+        │   └── covers/   # Blog post cover images
+        ├── projects/     # Project showcase images
+        ├── gallery/      # Portfolio gallery images
+        ├── about/        # About page images
+        │   ├── profile/  # Profile photos
+        │   └── team/     # Team member photos
+        ├── icons/        # UI icons and logos
+        │   ├── social/   # Social media icons
+        │   └── ui/       # Interface icons
+        └── hero/         # Hero section backgrounds
