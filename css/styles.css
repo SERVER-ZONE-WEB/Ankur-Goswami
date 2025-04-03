@@ -577,10 +577,12 @@ copyright {
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 
 .footer-bottom-links a:hover {
     color: var(--accent-color);
+    text-decoration: underline;
 }
 
 .footer-bottom-links span {
