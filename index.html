@@ -57,6 +57,12 @@
 
     <div id="footer"></div>
 
+    <!-- Update script paths -->
+    <script>
+        // Add base path detection
+        const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB' : '';
+        document.documentElement.style.setProperty('--base-path', `"${basePath}"`);
+    </script>
     <script src="components/loadComponents.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

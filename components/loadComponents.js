@@ -33,6 +33,23 @@ async function loadComponentWithRetry(elementId, componentPath, maxRetries = 3) 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadComponentWithRetry('header', '/components/header.html');
-    loadComponentWithRetry('footer', '/components/footer.html');
+    // Get base path for GitHub Pages
+    const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB' : '';
+    
+    async function loadComponent(elementId, componentPath) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        try {
+            const response = await fetch(`${basePath}${componentPath}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const html = await response.text();
+            element.innerHTML = html;
+        } catch (error) {
+            console.error(`Error loading ${elementId}:`, error);
+        }
+    }
+
+    loadComponent('header', '/components/header.html');
+    loadComponent('footer', '/components/footer.html');
 });
