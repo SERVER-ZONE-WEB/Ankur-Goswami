@@ -1,6 +1,14 @@
-# Server Zone - Cybersecurity Portfolio
+# Server Zone Web Platform
 
-A modern, responsive portfolio showcasing cybersecurity expertise and projects.
+A modern web platform for cybersecurity research, tutorials, and web development resources.
+
+## Features
+
+- 🔒 Security Articles & Tutorials
+- 💻 Web Development Guides
+- 🛠️ Project Showcases
+- 📱 Responsive Design
+- 🌓 Modern UI/UX
 
 ## 🚀 Quick Start
 
@@ -119,7 +127,7 @@ cd server-zone-web
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/server-zone-web.git
+git clone https://github.com/SERVER-ZONE-WEB/Ankur-Goswami.git
 cd server-zone-web
 ```
 
