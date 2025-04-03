@@ -1,76 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Create overlay if it doesn't exist
-    let overlay = document.querySelector('.overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'overlay';
-        document.body.appendChild(overlay);
-    }
-
     function showPolicy(policyId) {
-        const policySection = document.getElementById(policyId);
-        if (policySection) {
-            // Hide all other policies first
-            document.querySelectorAll('.policy-section').forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Show selected policy and overlay
-            overlay.style.display = 'block';
-            policySection.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-    }
-
-    function closeAllPolicies() {
+        // Hide all policies first
         document.querySelectorAll('.policy-section').forEach(section => {
-            section.style.display = 'none';
+            section.classList.remove('active');
         });
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto';
+
+        // Show selected policy
+        const selectedPolicy = document.getElementById(policyId);
+        if (selectedPolicy) {
+            selectedPolicy.classList.add('active');
+            selectedPolicy.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
-    // Handle policy link clicks
-    document.addEventListener('click', (e) => {
-        if (e.target.matches('.policy-link')) {
-            e.preventDefault();
-            const policyId = e.target.getAttribute('href').substring(1);
-            
-            // First check if we're on policies.html
-            if (!window.location.pathname.includes('policies.html')) {
-                window.location.href = `policies.html#${policyId}`;
-                return;
-            }
-            
-            showPolicy(policyId);
-        }
-
-        // Close when clicking overlay or close button
-        if (e.target.matches('.overlay') || e.target.matches('.close-policy') || e.target.matches('.close-policy *')) {
-            closeAllPolicies();
-        }
-    });
-
-    // Add close buttons to policies if they don't exist
-    document.querySelectorAll('.policy-section').forEach(section => {
-        if (!section.querySelector('.close-policy')) {
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'close-policy';
-            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-            section.appendChild(closeBtn);
-        }
-    });
-
-    // Close with ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeAllPolicies();
-        }
-    });
-
-    // Check URL hash on page load
+    // Handle initial load with hash
     if (window.location.hash) {
         const policyId = window.location.hash.substring(1);
         showPolicy(policyId);
+    } else {
+        // If no hash, show first policy by default
+        showPolicy('privacy-policy');
     }
+
+    // Handle clicks on policy links
+    document.querySelectorAll('.policy-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const policyId = link.getAttribute('href').split('#')[1];
+            showPolicy(policyId);
+        });
+    });
 });
