@@ -33,9 +33,10 @@ async function loadComponentWithRetry(elementId, componentPath, maxRetries = 3) 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Get base path for GitHub Pages
-    const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB' : '';
-    
+    // Get the repository name for GitHub Pages
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
+
     async function loadComponent(elementId, componentPath) {
         const element = document.getElementById(elementId);
         if (!element) return;
@@ -47,9 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             element.innerHTML = html;
         } catch (error) {
             console.error(`Error loading ${elementId}:`, error);
+            element.innerHTML = `<div class="error-component">Failed to load ${elementId}</div>`;
         }
     }
 
+    // Load header and footer with correct paths
     loadComponent('header', '/components/header.html');
     loadComponent('footer', '/components/footer.html');
 });
