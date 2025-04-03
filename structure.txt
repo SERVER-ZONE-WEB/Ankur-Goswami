@@ -1,14 +1,9 @@
 SERVER-ZONE-WEB/
-├── blog/                          # 📂 Blog Section 
-│   ├── posts/                     # 📂 Individual Blog Posts (Each post will have its own HTML file)
-│   │   ├── post1.html
-│   │   ├── post2.html
-│   │   ├── post3.html
-│   │   └── ...more posts
-│   ├── blog.html                   # 📝 Main Blog Page (Lists all blog posts)
-│   ├── blog.css                     # 🎨 Blog-specific CSS
-│   ├── blog.js                      # 🚀 JavaScript for Dynamic Blog Loading & Search                  
-│   └──blogData.json                  # 📂 JSON File for Blog Post Metadata
+├── posts/                     # 📂 Individual Blog Posts (Each post will have its own HTML file)
+│   ├── post1.html
+│   ├── post2.html
+│   ├── post3.html
+│   └── ...more posts
 │
 ├── components/                       # 📂 Common Components
 │   ├── header.html
@@ -37,5 +32,6 @@ SERVER-ZONE-WEB/
 ├── index.html                         # 🏠 Home Page
 ├── about.html                         # ℹ️ About Page
 ├── projects.html                      # 🏗️ Projects Page
+├── policies.html
 ├── blog.html                          # 📝 Blog Main Page
 └── README.md                          # 📄 Documentation
