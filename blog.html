@@ -40,28 +40,69 @@
                         <button class="mic-btn" title="Activate microphone"><i class="fas fa-microphone"></i></button>
                     </div>
                 </div>
-                <div id="blogPosts" class="blog-grid">
-                    <div class="loading-spinner" aria-label="Loading blog posts">
-                        <i class="fas fa-circle-notch fa-spin"></i>
-                        <p>Loading articles...</p>
+                
+                <div class="blog-posts-list">
+                    <!-- Security Category -->
+                    <div class="blog-category">
+                        <h2><i class="fas fa-shield-alt"></i> Security</h2>
+                        <div class="post-links">
+                            <a href="./posts/post1/index.html" class="post-link">
+                                <span class="post-date">Jan 15, 2024</span>
+                                <span class="post-title">Cybersecurity: The Ultimate Guide to Online Safety</span>
+                            </a>
+                            <!-- Add more security posts here -->
+                        </div>
+                    </div>
+
+                    <!-- Web Development Category -->
+                    <div class="blog-category">
+                        <h2><i class="fas fa-code"></i> Web Development</h2>
+                        <div class="post-links">
+                            <!-- Add web dev posts here -->
+                        </div>
+                    </div>
+
+                    <!-- Technology Category -->
+                    <div class="blog-category">
+                        <h2><i class="fas fa-microchip"></i> Technology</h2>
+                        <div class="post-links">
+                            <!-- Add technology posts here -->
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Single post view -->
+            <!-- Post Content Sections -->
             <div id="postView" class="hidden">
-                <button class="back-btn" onclick="showBlogList()" aria-label="Back to blog list">
-                    <i class="fas fa-arrow-left"></i> Back to Articles
-                </button>
-                <article id="postContent"></article>
-                <div class="post-navigation">
-                    <button id="prevPost" class="nav-btn" aria-label="Previous post">
-                        <i class="fas fa-chevron-left"></i> Previous
+                <!-- Post 1 Content -->
+                <div id="post1" class="post-content hidden">
+                    <button class="back-btn" onclick="showBlogList()">
+                        <i class="fas fa-arrow-left"></i> Back to Articles
                     </button>
-                    <button id="nextPost" class="nav-btn" aria-label="Next post">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <article>
+                        <header>
+                            <h1>Cybersecurity: The Ultimate Guide</h1>
+                            <div class="post-meta">
+                                <span><i class="far fa-user"></i> Ankur Goswami</span>
+                                <span><i class="far fa-calendar"></i> January 15, 2024</span>
+                            </div>
+                        </header>
+                        <img src="posts/post1/images/cybersecurity.png" alt="Cybersecurity Guide">
+                        <div class="post-content">
+                            <!-- Post content goes here -->
+                            <p>Cybersecurity is the practice of protecting systems...</p>
+                            <!-- Add full post content -->
+                        </div>
+                        <div class="share-buttons">
+                            <button onclick="sharePost('twitter')" title="Share on Twitter"><i class="fab fa-twitter"></i></button>
+                            <button onclick="sharePost('facebook')" title="Share on Facebook"><i class="fab fa-facebook"></i></button>
+                            <button onclick="likePost()" class="like-btn">
+                                <i class="far fa-heart"></i> <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    </article>
                 </div>
+                <!-- Add more post content sections here -->
             </div>
         </div>
     </main>

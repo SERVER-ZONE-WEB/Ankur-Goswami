@@ -2,7 +2,7 @@ let blogPosts = [];
 
 async function loadBlogList() {
     try {
-        const response = await fetch('/posts/posts.json');
+        const response = await fetch('./posts/posts.json');
         if (!response.ok) throw new Error('Failed to load posts');
         
         blogPosts = await response.json();
@@ -19,7 +19,7 @@ async function loadPost(postId) {
         const post = blogPosts.find(p => p.id === postId);
         if (!post) throw new Error('Post not found');
         
-        const response = await fetch(`/posts/${postId}/index.html`);
+        const response = await fetch(`.${post.path}`); // Add dot for relative path
         if (!response.ok) throw new Error('Failed to load post content');
         
         const content = await response.text();
@@ -250,4 +250,58 @@ document.addEventListener('DOMContentLoaded', () => {
             filterByCategory(btn.getAttribute('data-category'));
         });
     });
+});
+
+function showPost(postId) {
+    // Hide blog list
+    document.getElementById('blogList').style.display = 'none';
+    
+    // Hide all posts
+    document.querySelectorAll('.post-content').forEach(post => {
+        post.classList.add('hidden');
+    });
+    
+    // Show selected post
+    const postContent = document.getElementById(postId);
+    if (postContent) {
+        document.getElementById('postView').classList.remove('hidden');
+        postContent.classList.remove('hidden');
+        window.scrollTo(0, 0);
+        
+        // Update URL
+        history.pushState({ postId }, '', `?post=${postId}`);
+    }
+}
+
+function showBlogList() {
+    // Hide post view
+    document.getElementById('postView').classList.add('hidden');
+    document.querySelectorAll('.post-content').forEach(post => {
+        post.classList.add('hidden');
+    });
+    
+    // Show blog list
+    document.getElementById('blogList').style.display = 'block';
+    
+    // Update URL
+    history.pushState({}, '', window.location.pathname);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('post');
+    
+    if (postId) {
+        showPost(postId);
+    }
+});
+
+// Handle browser back/forward
+window.addEventListener('popstate', (event) => {
+    if (event.state?.postId) {
+        showPost(event.state.postId);
+    } else {
+        showBlogList();
+    }
 });
