@@ -68,6 +68,69 @@ document.addEventListener('DOMContentLoaded', () => {
     initBlogFilter();
 });
 
+// Improved section loading and reveal
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if elements exist before initializing
+    const revealElements = document.querySelectorAll('.reveal');
+    const sections = document.querySelectorAll('.section');
+    
+    // Add visibility class to sections
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+    });
+
+    // Reveal function for sections and elements
+    const reveal = () => {
+        const triggerBottom = window.innerHeight * 0.8;
+
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+                section.style.transition = 'all 0.6s ease';
+            }
+        });
+
+        revealElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < triggerBottom) {
+                el.classList.add('active');
+            }
+        });
+    };
+
+    // Initial reveal check
+    reveal();
+
+    // Add scroll listener with debounce
+    window.addEventListener('scroll', debounce(reveal, 50));
+
+    // Type effect for hero section
+    if (document.querySelector('.typed-text')) {
+        typeEffect();
+    }
+
+    // Initialize other features
+    if (document.querySelector('.highlight-grid')) {
+        activateHighlights();
+    }
+});
+
+// Add this function to activate highlights
+function activateHighlights() {
+    const highlights = document.querySelectorAll('.highlight-card');
+    highlights.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+}
+
 // Navigation handling
 document.querySelectorAll('nav a, .cta-primary, .cta-secondary, .view-project, .view-live, .view-code').forEach(link => {
     link.addEventListener('click', function(e) {
