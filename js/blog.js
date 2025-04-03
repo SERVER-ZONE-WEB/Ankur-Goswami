@@ -46,10 +46,19 @@ window.addEventListener('popstate', (event) => {
 
 async function loadPosts() {
     try {
-        const response = await fetch('./posts/index.json');
-        if (!response.ok) throw new Error('Failed to load posts index');
+        // Define your first blog post since posts.json isn't set up yet
+        blogPosts = [{
+            id: "post1",
+            title: "Cybersecurity: The Ultimate Guide to Online Safety",
+            category: "security",
+            date: "2024-01-15",
+            author: "Ankur Goswami",
+            image: "posts/post1/images/cybersecurity.png",
+            summary: "A complete guide to cybersecurity covering threats, solutions, and best practices for individuals and businesses.",
+            path: "posts/post1/index.html",
+            tags: ["Cybersecurity", "Online Safety", "Security"]
+        }];
         
-        blogPosts = await response.json();
         displayPosts(blogPosts);
     } catch (error) {
         console.error('Error loading blog posts:', error);
@@ -136,28 +145,26 @@ async function showPost(post) {
     if (!post) return;
     
     try {
-        // Load post content from HTML file
         const response = await fetch(post.path);
         if (!response.ok) throw new Error('Failed to load post content');
-        const postContent = await response.text();
+        const content = await response.text();
+        
+        // Extract just the article content from the loaded HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = content;
+        const articleContent = tempDiv.querySelector('article').innerHTML;
         
         // Hide blog list elements
-        const elementsToHide = ['blogPosts', 'searchBar', 'categories', 'featuredPost'];
-        elementsToHide.forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.style.opacity = '0';
-                setTimeout(() => element.style.display = 'none', 300);
-            }
-        });
-
+        document.getElementById('blogList').style.display = 'none';
+        
         // Show post content
-        setTimeout(() => {
-            document.getElementById('postData').innerHTML = postContent;
-            const postContent = document.getElementById('postContent');
-            postContent.style.display = 'block';
-            setTimeout(() => postContent.style.opacity = '1', 50);
-        }, 300);
+        const postContentDiv = document.getElementById('postContent');
+        postContentDiv.innerHTML = articleContent;
+        document.getElementById('postView').style.display = 'block';
+        
+        // Update URL and title
+        history.pushState({ postId: post.id }, post.title, `?post=${post.id}`);
+        document.title = `${post.title} - Blog`;
         
     } catch (error) {
         console.error('Error loading post:', error);
