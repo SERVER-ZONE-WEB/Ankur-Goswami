@@ -1,42 +1,29 @@
 SERVER-ZONE-WEB/
-├── posts/
-│   ├── index.json
-│   ├── post1/
-│   │   ├── post.html
-│   │   ├── cover.jpg
-│   │   └── images/
-│   └── post2/
-│       ├── post.html │       
-│       ├── cover.jpg │       
-│       └── images/
-│
-├── components/                       # 📂 Common Components
-│   ├── header.html
-│   ├── footer.html
-│   ├── meta.html
-│   └── loadComponents.js
-│
-├── js/                               # 📂 JavaScript Files
-│   ├── config.js
-│   ├── errorHandler.js
-│   ├── projectsData.js
-│   ├── utils.js
-│   ├── policies.js
-│   ├── search.js                     # 🔍 Blog Search Functionality
-│   ├── pagination.js                  # 📄 Pagination for Blog Posts
-│   └── dynamicLoader.js               # 🚀 Loads Blog Posts Dynamically
-│
-├── css/                              # 📂 Stylesheets
-│   ├── styles.css
-│   ├── blog.css
-│
-├── images/                           # 📂 Images
-│   ├── projects/
-│   ├── blog/                          # 📂 Blog Images
-│
-├── index.html                         # 🏠 Home Page
-├── about.html                         # ℹ️ About Page
-├── projects.html                      # 🏗️ Projects Page
-├── policies.html
-├── blog.html                          # 📝 Blog Main Page
-└── README.md                          # 📄 Documentation
+└── Ankur-Goswami/
+    ├── index.html              # Portfolio homepage
+    ├── about.html             # About page
+    ├── blog.html             # Blog page (with dynamic post loading)
+    ├── contact.html          # Contact page
+    │
+    ├── components/           # Reusable components
+    │   ├── header.html
+    │   └── footer.html
+    │
+    ├── css/
+    │   ├── styles.css       # Main styles
+    │   └── blog.css         # Blog-specific styles
+    │
+    ├── js/
+    │   ├── script.js        # Main JavaScript
+    │   └── blog.js          # Blog functionality
+    │
+    ├── posts/              # Blog posts data and content
+    │   ├── index.json      # Posts metadata and content
+    │   └── images/         # Blog post images
+    │       ├── post1/
+    │       └── post2/
+    │
+    └── images/
+        ├── projects/       # Project images
+        ├── gallery/        # Portfolio gallery
+        └── icons/         # UI icons and logos
