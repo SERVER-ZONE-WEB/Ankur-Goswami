@@ -55,7 +55,7 @@ async function loadPosts() {
             author: "Ankur Goswami",
             image: "posts/post1/images/cybersecurity.png",
             summary: "A complete guide to cybersecurity covering threats, solutions, and best practices for individuals and businesses.",
-            path: "posts/post1/index.html",
+            path: "posts\post1\cybersecurity-basic.html",
             tags: ["Cybersecurity", "Online Safety", "Security"]
         }];
         

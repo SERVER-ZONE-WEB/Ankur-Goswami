@@ -7,7 +7,7 @@
             "date": "2024-01-15",
             "author": "Ankur Goswami",
             "image": "./posts/cybersecurity-guide/images/cover.jpg",
-            "content": "./posts/cybersecurity-guide/index.html"
+            "content": "./posts/cybersecurity-guide/posts/post1/cybersecurity-basic.html"
         },
         {
             "id": "web-development-basics",
@@ -16,7 +16,7 @@
             "date": "2024-01-20",
             "author": "Ankur Goswami",
             "image": "./posts/web-development-basics/images/cover.jpg",
-            "content": "./posts/web-development-basics/index.html"
+            "content": "./posts/web-development-basics/webdevelopment.html"
         }
     ]
 }
