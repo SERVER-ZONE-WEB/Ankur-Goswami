@@ -685,3 +685,60 @@ const initializeProjectCards = () => {
         // ...existing project card initialization code...
     });
 };
+
+// Page-specific typing text configurations
+const typingTexts = {
+    'index': [
+        "Welcome to My Portfolio",
+        "Full-Stack Developer",
+        "Cybersecurity Enthusiast"
+    ],
+    'about': [
+        "About Me",
+        "Tech Explorer",
+        "Passionate Developer"
+    ],
+    'projects': [
+        "My Work",
+        "Recent Projects",
+        "Open Source Contributions"
+    ]
+};
+
+function initTypeWriter() {
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+    const element = document.querySelector('.typing-text');
+    if (!element) return;
+
+    const texts = typingTexts[currentPage] || typingTexts['index'];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentText = texts[textIndex];
+        
+        if (isDeleting) {
+            element.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            element.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentText.length) {
+            isDeleting = true;
+            setTimeout(type, 2000);
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(type, 500);
+        } else {
+            setTimeout(type, isDeleting ? 50 : 100);
+        }
+    }
+
+    type();
+}
+
+document.addEventListener('DOMContentLoaded', initTypeWriter);
