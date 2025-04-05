@@ -2,6 +2,7 @@ ANKUR-GOSWAMI/
 ├── index.html
 ├── about.html
 ├── projects.html
+├── policies.html
 ├── assets/
 │   ├── css/
 │   │   └── style.css
