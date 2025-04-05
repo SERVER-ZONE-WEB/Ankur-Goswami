@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Ankur Goswami</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="header"></div>
-
-    <main class="projects-container">
+    <div id="header-container"></div>
+    
+    <main class="main-content">
         <div class="container">
             <h1 class="text-gradient">My Projects</h1>
             
@@ -27,22 +28,18 @@
         </div>
     </main>
 
-    <div id="footer"></div>
+    <div id="footer-container"></div>
 
+    <!-- Core Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/includeComponents.js"></script>
     <script src="assets/js/loadProjects.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Filter functionality
-            const filters = document.querySelectorAll('.filter-btn');
-            filters.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filters.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const filter = btn.dataset.filter;
-                    filterProjects(filter);
-                });
-            });
+        AOS.init({
+            duration: 1000,
+            once: true
         });
     </script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

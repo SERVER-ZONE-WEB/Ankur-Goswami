@@ -13,35 +13,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div id="header"></div><header class="hero">
-        <div class="hero-content">
-            <h1 class="glitch-text">Ankur Goswami</h1>
-            <div class="typed-container">
-                <span class="typed-text"></span>
-                <span class="cursor">&nbsp;</span>
+    <div id="header-container"></div>
+    
+    <main class="main-content">
+        <header class="hero">
+            <div class="hero-content animate fade-in">
+                <h1 class="glitch-text animate slide-up delay-1">Ankur Goswami</h1>
+                <div class="typed-container animate slide-up delay-2">
+                    <span class="typed-text"></span>
+                    <span class="cursor">&nbsp;</span>
+                </div>
+                <p class="hero-description animate slide-up delay-3">Securing the digital world, one line of code at a time.</p>
             </div>
-            <p class="hero-description">Securing the digital world, one line of code at a time.</p>
-        </div>
-        <div class="hero-background">
-            <div class="matrix-effect"></div>
-        </div>
-    </header>
+            <div class="hero-background animate fade-in delay-4">
+                <div class="matrix-effect"></div>
+            </div>
+        </header>
 
-    <main>
         <section id="highlights" class="section">
             <div class="container">
                 <div class="highlight-grid">
-                    <div class="highlight-card reveal">
+                    <div class="highlight-card reveal animate slide-up delay-1">
                         <i class="fas fa-shield-alt"></i>
                         <h3>Security Expert</h3>
                         <p>Specialized in penetration testing and security auditing</p>
                     </div>
-                    <div class="highlight-card reveal">
+                    <div class="highlight-card reveal animate slide-up delay-2">
                         <i class="fas fa-code"></i>
                         <h3>Full Stack Dev</h3>
                         <p>Building secure and scalable web applications</p>
                     </div>
-                    <div class="highlight-card reveal">
+                    <div class="highlight-card reveal animate slide-up delay-3">
                         <i class="fas fa-graduation-cap"></i>
                         <h3>Certified Pro</h3>
                         <p>CEH, CISSP, and other security certifications</p>
@@ -52,9 +54,9 @@
 
         <section id="featured-projects" class="section">
             <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
+                <h2 class="section-title animate fade-in">Featured Projects</h2>
                 <div class="featured-grid">
-                    <div class="project-card featured reveal">
+                    <div class="project-card featured reveal animate slide-left delay-1">
                         <img src="images/projects/scanner.jpg" alt="Security Scanner">
                         <div class="project-info">
                             <h3>Network Security Scanner</h3>
@@ -70,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card featured reveal">
+                    <div class="project-card featured reveal animate slide-left delay-2">
                         <img src="images/projects/webdev.jpg" alt="Web Development">
                         <div class="project-info">
                             <h3>Server Zone Website</h3>
@@ -92,9 +94,9 @@
 
         <section id="latest-blogs" class="section">
             <div class="container">
-                <h2 class="section-title">Latest Articles</h2>
+                <h2 class="section-title animate fade-in">Latest Articles</h2>
                 <div class="blog-grid">
-                    <div class="blog-card reveal">
+                    <div class="blog-card reveal animate scale-in delay-1">
                         <img src="posts/post1/images/cybersecurity.png" alt="Cybersecurity Guide">
                         <div class="blog-info">
                             <span class="category">Security</span>
@@ -103,7 +105,7 @@
                             <a href="blog.html" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <div class="blog-card reveal">
+                    <div class="blog-card reveal animate scale-in delay-2">
                         <img src="posts/post2/images/webdev.png" alt="Web Development">
                         <div class="blog-info">
                             <span class="category">Web Development</span>
@@ -118,9 +120,9 @@
 
         <section id="skills" class="section">
             <div class="container">
-                <h2 class="section-title">Skills & Technologies</h2>
+                <h2 class="section-title animate fade-in">Skills & Technologies</h2>
                 <div class="skills-grid">
-                    <div class="skill-category reveal">
+                    <div class="skill-category reveal animate slide-up delay-1">
                         <h3><i class="fas fa-shield-alt"></i> Security</h3>
                         <div class="skill-bars">
                             <div class="skill-bar">
@@ -137,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="skill-category reveal">
+                    <div class="skill-category reveal animate slide-up delay-2">
                         <h3><i class="fas fa-code"></i> Development</h3>
                         <div class="skill-bars">
                             <div class="skill-bar">
@@ -154,7 +156,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="skill-category reveal">
+                    <div class="skill-category reveal animate slide-up delay-3">
                         <h3><i class="fas fa-tools"></i> Tools</h3>
                         <div class="skill-bars">
                             <div class="skill-bar">
@@ -176,41 +178,19 @@
         </section>
     </main>
 
-    <div id="footer"></div>
+    <div id="footer-container"></div>
 
-    <!-- Update script paths -->
-    <script>
-        // Add base path detection
-        const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB' : '';
-        document.documentElement.style.setProperty('--base-path', `"${basePath}"`);
-    </script>
-    <script src="components/loadComponents.js"></script>
+    <!-- Core Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/includeComponents.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Initialize AOS
         AOS.init({
             duration: 1000,
             once: true
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            // Get base path for GitHub Pages
-            const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
-            
-            // Load components with corrected paths
-            $("#header").load(`${basePath}/components/header.html`, function(response, status, xhr) {
-                if (status === "error") {
-                    console.error("Error loading header:", xhr.status, xhr.statusText);
-                }
-            });
-            
-            $("#footer").load(`${basePath}/components/footer.html`, function(response, status, xhr) {
-                if (status === "error") {
-                    console.error("Error loading footer:", xhr.status, xhr.statusText);
-                }
-            });
-        });
-    </script>
-    <script src="js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

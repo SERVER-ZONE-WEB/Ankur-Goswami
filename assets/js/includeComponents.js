@@ -1,14 +1,38 @@
-async function includeHTML() {
-    const header = await fetch('/components/header.html');
-    const footer = await fetch('/components/footer.html');
+document.addEventListener('DOMContentLoaded', function() {
+    const basePath = window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
     
-    document.querySelector('#header-placeholder').innerHTML = await header.text();
-    document.querySelector('#footer-placeholder').innerHTML = await footer.text();
-    
-    // Set active nav item
-    const currentPage = window.location.pathname;
-    document.querySelector(`[data-nav="${currentPage === '/' ? 'home' : currentPage.split('.')[0].slice(1)}"]`)
-        ?.classList.add('active');
-}
+    // Load components
+    loadComponents();
 
-document.addEventListener('DOMContentLoaded', includeHTML);
+    async function loadComponents() {
+        try {
+            // Load header
+            const headerResponse = await fetch(`${basePath}/components/header.html`);
+            const headerHtml = await headerResponse.text();
+            document.getElementById('header-container').innerHTML = headerHtml;
+
+            // Load footer
+            const footerResponse = await fetch(`${basePath}/components/footer.html`);
+            const footerHtml = await footerResponse.text();
+            document.getElementById('footer-container').innerHTML = footerHtml;
+
+            // Initialize active states
+            setActiveNavLink();
+
+        } catch (error) {
+            console.error('Error loading components:', error);
+        }
+    }
+
+    function setActiveNavLink() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath || 
+                (currentPath.endsWith('/') && link.getAttribute('href') === 'index.html')) {
+                link.classList.add('active');
+            }
+        });
+    }
+});
