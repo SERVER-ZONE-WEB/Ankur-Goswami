@@ -1,0 +1,18 @@
+# Existing ignores
+node_modules/
+.DS_Store
+
+# Secure directory
+secure/
+*.env
+*.key
+.htpasswd
+config.json
+
+# System files
+.DS_Store
+node_modules/
+
+# Build files
+dist/
+build/
