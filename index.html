@@ -23,6 +23,7 @@
                     <span class="typed-text"></span>
                     <span class="cursor">&nbsp;</span>
                 </div>
+                <div id="overview-text" class="overview-text"></div>
                 <p class="hero-description animate slide-up delay-3">Securing the digital world, one line of code at a time.</p>
             </div>
             <div class="hero-background animate fade-in delay-4">
@@ -192,5 +193,33 @@
         });
     </script>
     <script src="assets/js/script.js"></script>
+    <script>
+        const overviewTexts = [
+            "Full Stack Developer & Security Researcher",
+            "Specializing in Web Security & Pentesting",
+            "Creating Secure Web Applications",
+            "2+ Years of Industry Experience",
+            "50+ Projects Completed Successfully"
+        ];
+
+        function animateOverview() {
+            const textElement = document.getElementById('overview-text');
+            let currentIndex = 0;
+
+            function updateText() {
+                textElement.style.opacity = '0';
+                setTimeout(() => {
+                    textElement.textContent = overviewTexts[currentIndex];
+                    textElement.style.opacity = '1';
+                    currentIndex = (currentIndex + 1) % overviewTexts.length;
+                }, 500);
+            }
+
+            updateText(); // Initial text
+            setInterval(updateText, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', animateOverview);
+    </script>
 </body>
 </html>
