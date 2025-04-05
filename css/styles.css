@@ -23,13 +23,16 @@ body {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+    padding-top: 45px; /* Match nav height exactly */
+    min-height: 100vh;
 }
 
 /* Typography */
 section {
-    padding: 100px 0;
+    padding: 4rem 0;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
+    width: 100%;
 }
 
 h1, h2, h3 {
@@ -57,6 +60,8 @@ nav {
     z-index: 1000;
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0 1rem;
 }
 
 nav ul {
@@ -143,13 +148,16 @@ nav ul li a:hover::after {
 header {
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 100vh; /* Adjust for nav height */
     background: linear-gradient(135deg, rgba(10,25,47,0.9), rgba(17,34,64,0.9)), 
                 url('https://source.unsplash.com/1600x900/?technology') center/cover;
     color: var(--light-color);
     display: flex;
     align-items: center;
-    padding-top: 80px;
+    padding-top: 0; /* Remove extra padding */
+    margin-top: 0;
+    margin: 0;
+    padding: 0;
 }
 
 header::before {
@@ -170,7 +178,35 @@ header::before {
     z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 2rem; /* Reduced padding */
+    margin: 0;
+}
+
+#header {
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-size: 0; /* Removes any text node spacing */
+}
+
+header.hero {
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 45px);
+}
+
+#header {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+
+.hero {
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 
 /* Skills Section */
@@ -195,7 +231,8 @@ header::before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    padding: 2rem;
+    padding: 0;
+    margin-top: 2rem;
 }
 
 .project-card {
@@ -644,6 +681,22 @@ copyright {
     
     .project-card {
         padding: 1.5rem;
+    }
+    
+    body {
+        padding-top: 45px;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .header-content {
+        padding: 0 1rem;
     }
 }
 
@@ -1145,6 +1198,7 @@ copyright {
     padding: 6rem 0;
     position: relative;
     overflow: hidden;
+    margin: 0;
 }
 
 .container {
@@ -1152,25 +1206,7 @@ copyright {
     margin: 0 auto;
     padding: 0 2rem;
     width: 100%;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--heading-color);
-    font-size: 2.5rem;
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--accent-color);
+    margin: 0 auto;
 }
 
 /* Grid Layouts */

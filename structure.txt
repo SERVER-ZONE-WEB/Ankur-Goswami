@@ -1,41 +1,19 @@
-SERVER-ZONE-WEB/
-└── Ankur-Goswami/
-    ├── index.html              # Portfolio homepage
-    ├── about.html             # About page
-    ├── blog.html             # Blog listing and viewer
-    ├── projects.html          # Projects page
-    ├── policies.html           # Policies page
-    │
-    ├── components/           # Reusable components
-    │   ├── header.html
-    │   └── footer.html
-    │
-    ├── css/
-    │   ├── styles.css       # Main styles
-    │   └── blog.css         # Blog-specific styles
-    │
-    ├── js/
-    │   ├── script.js        # Main JavaScript
-    │   └── blog.js          # Blog functionality
-    │
-    ├── posts/              # Blog posts
-    │   ├── post1/
-    │   │   ├── index.html
-    │   │   └── images/     # Post specific images
-    │   └── post2/
-    │       ├── index.html
-    │       └── images/
-    │
-    └── images/            # All website images
-        ├── blog/         # Blog related images
-        │   ├── featured/ # Featured blog images
-        │   └── covers/   # Blog post cover images
-        ├── projects/     # Project showcase images
-        ├── gallery/      # Portfolio gallery images
-        ├── about/        # About page images
-        │   ├── profile/  # Profile photos
-        │   └── team/     # Team member photos
-        ├── icons/        # UI icons and logos
-        │   ├── social/   # Social media icons
-        │   └── ui/       # Interface icons
-        └── hero/         # Hero section backgrounds
+ANKUR-GOSWAMI/
+├── index.html
+├── about.html
+├── projects.html
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── include.js       # Inject header/footer
+│   │   └── main.js
+│   ├── img/
+│   │   └── profile.jpg
+├── components/
+│   ├── header.html
+│   └── footer.html
+├── data/
+│   └── projects.json        # For dynamic projects
+├── README.md
+└── .gitignore

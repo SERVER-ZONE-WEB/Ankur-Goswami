@@ -1,15 +1,14 @@
-// Add at the beginning of the file
+// Base path utility
 function getBasePath() {
     return window.location.hostname === 'github.io' ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
 }
 
-// Use this function when loading resources
 function getResourcePath(path) {
     const basePath = getBasePath();
     return `${basePath}${path}`;
 }
 
-// Add typing animation for the header
+// Core typing animation
 const titles = [
     "Cyber Security Expert",
     "Web Developer",
@@ -45,13 +44,20 @@ function typeEffect() {
     typingTimeout = setTimeout(typeEffect, typingSpeed);
 }
 
-// Clean up event listeners
-function cleanupEventListeners() {
-    if (typingTimeout) clearTimeout(typingTimeout);
-    window.removeEventListener('scroll', handleScrollDebounced);
+// Utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
-// Improved initialization
+// Core initialization
 document.addEventListener('DOMContentLoaded', () => {
     const handleScrollDebounced = debounce(handleScroll, 150);
     window.addEventListener('scroll', handleScrollDebounced);
@@ -60,193 +66,99 @@ document.addEventListener('DOMContentLoaded', () => {
         typeEffect();
         createMatrixEffect();
     }
-    
+
     // Clean up on page unload
     window.addEventListener('unload', cleanupEventListeners);
-
-    if (document.querySelector('.about-page')) {
-        animateStats();
-    }
-    if (document.querySelector('.company-info')) {
-        setTimeout(typeCompanyInfo, 1000);
-    }
-    // Only initialize project-specific features if on projects page
-    if (document.querySelector('.projects-grid')) {
-        loadProjects();
-        initProjectSearch();
-    }
-    initAboutPage();
-    initBlogFilter();
-});
-
-// Improved section loading and reveal
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if elements exist before initializing
-    const revealElements = document.querySelectorAll('.reveal');
-    const sections = document.querySelectorAll('.section');
     
-    // Add visibility class to sections
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-    });
+    initializeCore();
+    adjustHeaderSpacing();
 
-    // Reveal function for sections and elements
-    const reveal = () => {
-        const triggerBottom = window.innerHeight * 0.8;
-
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-            if (sectionTop < triggerBottom) {
-                section.style.opacity = '1';
-                section.style.transform = 'translateY(0)';
-                section.style.transition = 'all 0.6s ease';
-            }
-        });
-
-        revealElements.forEach(el => {
-            const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < triggerBottom) {
-                el.classList.add('active');
-            }
-        });
-    };
-
-    // Initial reveal check
-    reveal();
-
-    // Add scroll listener with debounce
-    window.addEventListener('scroll', debounce(reveal, 50));
-
-    // Type effect for hero section
-    if (document.querySelector('.typed-text')) {
-        typeEffect();
-    }
-
-    // Initialize other features
-    if (document.querySelector('.highlight-grid')) {
-        activateHighlights();
+    if (document.querySelector('#featured-projects')) {
+        fetchLatestProjects();
     }
 });
 
-// Add this function to activate highlights
-function activateHighlights() {
-    const highlights = document.querySelectorAll('.highlight-card');
-    highlights.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-10px)';
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-        });
+function initializeCore() {
+    // Navigation handling
+    document.querySelectorAll('nav a, .cta-primary, .cta-secondary').forEach(link => {
+        link.addEventListener('click', handleNavigation);
     });
+
+    // Project cards
+    document.querySelectorAll('.project-card').forEach(initializeProjectCard);
+
+    // Initialize animations
+    initializeAnimations();
 }
 
-// Navigation handling
-document.querySelectorAll('nav a, .cta-primary, .cta-secondary, .view-project, .view-live, .view-code').forEach(link => {
-    link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        
-        // If it's an external link or email, let it behave normally
-        if (href.startsWith('http') || href.startsWith('mailto:')) {
-            return;
-        }
-        
-        e.preventDefault();
-        
-        // If it's a page navigation
-        if (href.endsWith('.html')) {
-            window.location.href = href;
-            return;
-        }
-        
-        // If it's a section navigation
-        const target = document.querySelector(href);
-        if (target) {
-            target.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start'
-            });
-        }
-    });
-});
+function handleNavigation(e) {
+    const href = this.getAttribute('href');
+    if (href.startsWith('http') || href.startsWith('mailto:')) return;
+    
+    e.preventDefault();
+    if (href.endsWith('.html')) {
+        window.location.href = href;
+        return;
+    }
+    
+    const target = document.querySelector(href);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 
-// Update project card click handling
-document.querySelectorAll('.project-card').forEach(card => {
+function initializeProjectCard(card) {
     const link = card.getAttribute('data-link');
     if (link) {
-        card.addEventListener('click', function() {
-            window.location.href = link;
-        });
+        card.addEventListener('click', () => window.location.href = link);
     }
 
-    card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        card.style.setProperty('--x', `${x}px`);
-        card.style.setProperty('--y', `${y}px`);
-    });
-});
-
-// Special animation for featured project
-const featuredProject = document.querySelector('.project-card.featured');
-if (featuredProject) {
-    featuredProject.addEventListener('mouseenter', () => {
-        featuredProject.style.transform = 'scale(1.02)';
-    });
-    
-    featuredProject.addEventListener('mouseleave', () => {
-        featuredProject.style.transform = 'scale(1)';
-    });
+    card.addEventListener('mousemove', handleCardHover);
 }
 
-// Animate skill bars on scroll
-const observerCallback = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.width = entry.target.dataset.progress;
-        }
+function handleCardHover(e) {
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    this.style.setProperty('--x', `${x}px`);
+    this.style.setProperty('--y', `${y}px`);
+}
+
+function initializeAnimations() {
+    // Skill bars animation
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.width = entry.target.dataset.progress;
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.skill-progress').forEach(bar => {
+        observer.observe(bar);
     });
-};
 
-const observer = new IntersectionObserver(observerCallback, {
-    threshold: 0.5
-});
+    // Scroll reveal animation
+    const revealElements = document.querySelectorAll('.reveal');
+    window.addEventListener('scroll', debounce(() => {
+        revealElements.forEach(el => {
+            if (elementInView(el)) {
+                el.classList.add('revealed');
+            }
+        });
+    }, 50));
+}
 
-document.querySelectorAll('.skill-progress').forEach(bar => {
-    observer.observe(bar);
-});
-
-// Add scroll reveal animation
-const revealElements = document.querySelectorAll('.reveal');
-const elementInView = (el, offset = 150) => {
+function elementInView(el, offset = 150) {
     const elementTop = el.getBoundingClientRect().top;
     return elementTop <= window.innerHeight - offset;
-};
-
-const displayScrollElement = (element) => {
-    element.classList.add('revealed');
-};
-
-const hideScrollElement = (element) => {
-    element.classList.remove('revealed');
-};
-
-const handleScrollAnimation = () => {
-    revealElements.forEach((el) => {
-        if (elementInView(el, 150)) {
-            displayScrollElement(el);
-        } else {
-            hideScrollElement(el);
-        }
-    });
 }
 
-window.addEventListener('scroll', () => {
-    handleScrollAnimation();
-});
+// Cleanup function
+function cleanupEventListeners() {
+    if (typingTimeout) clearTimeout(typingTimeout);
+}
 
 // Enhanced scroll handling
 let isLoading = false;
@@ -270,21 +182,6 @@ async function handleScroll() {
         }
     }
 }
-
-// Debounced scroll handler
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-window.addEventListener('scroll', debounce(handleScroll, 150));
 
 // Update form submission
 document.querySelectorAll('.contact-form form').forEach(form => {
@@ -703,3 +600,88 @@ function initBlogFilter() {
         }, 300));
     }
 }
+
+// Add spacing adjustment function
+function adjustHeaderSpacing() {
+    const nav = document.querySelector('nav');
+    const header = document.querySelector('header');
+    const body = document.body;
+    
+    if (nav && header) {
+        const navHeight = nav.offsetHeight;
+        body.style.paddingTop = navHeight + 'px';
+        header.style.minHeight = `calc(100vh - ${navHeight}px)`;
+        header.style.marginTop = '0';
+        header.style.paddingTop = '0';
+    }
+}
+
+// Add window resize handler with debounce
+window.addEventListener('resize', debounce(() => {
+    adjustHeaderSpacing();
+}, 150));
+
+function adjustLayout() {
+    const nav = document.querySelector('nav');
+    const header = document.querySelector('header');
+    const mainContent = document.querySelector('main');
+    
+    if (nav && header) {
+        const navHeight = nav.offsetHeight;
+        
+        // Adjust header
+        header.style.height = `calc(100vh - ${navHeight}px)`;
+        header.style.marginTop = `${navHeight}px`;
+        
+        // Adjust main content
+        if (mainContent) {
+            mainContent.style.marginTop = '0';
+        }
+    }
+}
+
+// Call on load and resize
+document.addEventListener('DOMContentLoaded', adjustLayout);
+window.addEventListener('resize', debounce(adjustLayout, 150));
+
+// Project fetching and display
+const fetchLatestProjects = () => {
+    const projectsContainer = document.querySelector('#featured-projects .featured-grid');
+    if (!projectsContainer) return;
+
+    fetch('projects.html')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const projectsByCategory = {};
+
+            // Get all projects and group by category
+            doc.querySelectorAll('.project-card').forEach(project => {
+                const category = project.dataset.category;
+                if (!projectsByCategory[category]) {
+                    projectsByCategory[category] = [];
+                }
+                projectsByCategory[category].push(project.outerHTML);
+            });
+
+            // Get latest 2 projects from each category
+            let featuredHtml = '';
+            for (const category in projectsByCategory) {
+                const latestProjects = projectsByCategory[category].slice(0, 2);
+                featuredHtml += latestProjects.join('');
+            }
+
+            projectsContainer.innerHTML = featuredHtml;
+            initializeProjectCards();
+        })
+        .catch(error => console.error('Error fetching projects:', error));
+};
+
+// Initialize project cards with animations and interactions
+const initializeProjectCards = () => {
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.classList.add('reveal');
+        // ...existing project card initialization code...
+    });
+};
