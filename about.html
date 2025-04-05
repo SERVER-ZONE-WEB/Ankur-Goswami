@@ -14,29 +14,27 @@
 
     <main class="main-content about-page">
         <section class="about-hero">
-            <div class="about-content reveal">
-                <h1>About Me</h1>
-                <div class="profile-container">
+            <div class="container">
+                <div class="profile-section">
                     <div class="profile-image">
-                        <img src="images/gallery/profile.jpg" alt="Ankur Goswami">
-                        <div class="image-overlay"></div>
+                        <img src="../assets/img/about/profile/profile.jpg" 
+                             alt="Ankur Goswami"
+                             onerror="this.src='assets/img/default-avatar.png'">
                     </div>
                     <div class="profile-info">
-                        <h2>Ankur Goswami</h2>
-                        <p class="title">Cybersecurity Expert & Web Developer</p>
-                        <div class="company-info">
-                            <span class="company-text"></span>
-                            <span class="cursor">&nbsp;</span>
-                        </div>
-                        <div class="stats">
+                        <h1 class="text-gradient">Ankur Goswami</h1>
+                        <div id="typing-text" class="typing-text"></div>
+                        <div class="stats-row">
                             <div class="stat-item">
                                 <span class="stat-number">2+</span>
                                 <span class="stat-label">Years Experience</span>
                             </div>
+                            <div class="divider">•</div>
                             <div class="stat-item">
                                 <span class="stat-number">50+</span>
                                 <span class="stat-label">Projects</span>
                             </div>
+                            <div class="divider">•</div>
                             <div class="stat-item">
                                 <span class="stat-number">20+</span>
                                 <span class="stat-label">Certifications</span>
@@ -106,5 +104,30 @@
         });
     </script>
     <script src="assets/js/script.js"></script>
+    <script>
+        const profileDescriptions = [
+            "Cybersecurity Expert & Researcher",
+            "Full Stack Web Developer",
+            "CEH Certified Professional",
+            "Network Security Specialist",
+            "Web Security Consultant"
+        ];
+
+        function animateText() {
+            const textElement = document.getElementById('typing-text');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                textElement.style.opacity = '0';
+                setTimeout(() => {
+                    textElement.textContent = profileDescriptions[currentIndex];
+                    textElement.style.opacity = '1';
+                    currentIndex = (currentIndex + 1) % profileDescriptions.length;
+                }, 500);
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', animateText);
+    </script>
 </body>
 </html>
