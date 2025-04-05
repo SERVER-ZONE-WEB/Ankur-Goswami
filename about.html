@@ -6,14 +6,13 @@
     <title>About - Ankur Goswami</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/policies.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div id="header"></div>
+    <div id="header-container"></div>
 
-    <main class="about-page">
+    <main class="main-content about-page">
         <section class="about-hero">
             <div class="about-content reveal">
                 <h1>About Me</h1>
@@ -94,22 +93,18 @@
         </section>
     </main>
 
-    <div id="footer"></div>
+    <div id="footer-container"></div>
 
+    <!-- Core Scripts -->
+    <script src="assets/js/includeComponents.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#header").load("components/header.html", function(response, status, xhr) {
-                if (status === "error") {
-                    console.error("Error loading header:", xhr.status, xhr.statusText);
-                }
-            });
-            $("#footer").load("components/footer.html", function(response, status, xhr) {
-                if (status === "error") {
-                    console.error("Error loading footer:", xhr.status, xhr.statusText);
-                }
-            });
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
         });
     </script>
-    <script src="js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
