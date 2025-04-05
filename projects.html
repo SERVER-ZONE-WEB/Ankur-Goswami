@@ -40,6 +40,20 @@
             once: true
         });
     </script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/includeComponents.js"></script>
+    <script src="assets/js/loadProjects.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script>
+        // Load the header and footer
+        $(document).ready(function() {
+            $("#header-container").load("components/header.html");
+            $("#footer-container").load("components/footer.html", function() {
+                // Set the current year in the footer
+                const year = new Date().getFullYear();
+                $("#year").text(year);
+            });
+        });
+    </script>
 </body>
 </html>

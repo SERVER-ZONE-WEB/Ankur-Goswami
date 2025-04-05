@@ -17,9 +17,8 @@
             <div class="container">
                 <div class="profile-section">
                     <div class="profile-image">
-                        <img src="assets/img/profile.jpg" alt="Ankur Goswami">
+                        <img src="assets/img/profile.jpg" alt="Ankur Goswami" onerror="this.src='assets/img/default-avatar.png'">
                     </div>
-                    <div class="typing-text"></div>
                     <div class="profile-info">
                         <h1 class="text-gradient">Ankur Goswami</h1>
                         <div id="typing-text" class="typing-text"></div>
@@ -96,38 +95,8 @@
     <script src="assets/js/includeComponents.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
+        AOS.init({ duration: 1000, once: true });
     </script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/animation.js"></script>
-    <script>
-        const profileDescriptions = [
-            "Cybersecurity Expert & Researcher",
-            "Full Stack Web Developer",
-            "CEH Certified Professional",
-            "Network Security Specialist",
-            "Web Security Consultant"
-        ];
-
-        function animateText() {
-            const textElement = document.getElementById('typing-text');
-            let currentIndex = 0;
-
-            setInterval(() => {
-                textElement.style.opacity = '0';
-                setTimeout(() => {
-                    textElement.textContent = profileDescriptions[currentIndex];
-                    textElement.style.opacity = '1';
-                    currentIndex = (currentIndex + 1) % profileDescriptions.length;
-                }, 500);
-            }, 3000);
-        }
-
-        document.addEventListener('DOMContentLoaded', animateText);
-    </script>
 </body>
 </html>

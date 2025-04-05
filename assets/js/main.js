@@ -57,102 +57,60 @@ function debounce(func, wait) {
     };
 }
 
+// Core configurations
+// Removed duplicate declaration of typingTexts
+
 // Core initialization
 document.addEventListener('DOMContentLoaded', () => {
-    const handleScrollDebounced = debounce(handleScroll, 150);
-    window.addEventListener('scroll', handleScrollDebounced);
-
-    if (document.querySelector('.hero')) {
-        typeEffect();
-        createMatrixEffect();
+    // Initialize typing effect
+    const typingElement = document.querySelector('.typing-text');
+    if (typingElement) {
+        initTypeWriter(typingElement);
     }
 
-    // Clean up on page unload
-    window.addEventListener('unload', cleanupEventListeners);
-    
+    // Initialize components
     initializeCore();
-    adjustHeaderSpacing();
-
-    if (document.querySelector('#featured-projects')) {
-        fetchLatestProjects();
-    }
 });
 
 function initializeCore() {
-    // Navigation handling
-    document.querySelectorAll('nav a, .cta-primary, .cta-secondary').forEach(link => {
+    // Initialize navigation
+    document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', handleNavigation);
     });
 
-    // Project cards
-    document.querySelectorAll('.project-card').forEach(initializeProjectCard);
-
-    // Initialize animations
-    initializeAnimations();
+    // Initialize animations if AOS is loaded
+    if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 1000, once: true });
+    }
 }
 
 function handleNavigation(e) {
     const href = this.getAttribute('href');
-    if (href.startsWith('http') || href.startsWith('mailto:')) return;
+    if (href && (href.startsWith('http') || href.startsWith('mailto:'))) return;
     
     e.preventDefault();
-    if (href.endsWith('.html')) {
+    if (href && href.endsWith('.html')) {
         window.location.href = href;
         return;
     }
-    
-    const target = document.querySelector(href);
-    if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function initTypeWriter(element) {
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+    const texts = typingTexts[currentPage] || typingTexts['index'];
+    let textIndex = 0;
+
+    function updateText() {
+        element.style.opacity = '0';
+        setTimeout(() => {
+            element.textContent = texts[textIndex];
+            element.style.opacity = '1';
+            textIndex = (textIndex + 1) % texts.length;
+        }, 500);
     }
-}
 
-function initializeProjectCard(card) {
-    const link = card.getAttribute('data-link');
-    if (link) {
-        card.addEventListener('click', () => window.location.href = link);
-    }
-
-    card.addEventListener('mousemove', handleCardHover);
-}
-
-function handleCardHover(e) {
-    const rect = this.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    this.style.setProperty('--x', `${x}px`);
-    this.style.setProperty('--y', `${y}px`);
-}
-
-function initializeAnimations() {
-    // Skill bars animation
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.width = entry.target.dataset.progress;
-            }
-        });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.skill-progress').forEach(bar => {
-        observer.observe(bar);
-    });
-
-    // Scroll reveal animation
-    const revealElements = document.querySelectorAll('.reveal');
-    window.addEventListener('scroll', debounce(() => {
-        revealElements.forEach(el => {
-            if (elementInView(el)) {
-                el.classList.add('revealed');
-            }
-        });
-    }, 50));
-}
-
-function elementInView(el, offset = 150) {
-    const elementTop = el.getBoundingClientRect().top;
-    return elementTop <= window.innerHeight - offset;
+    updateText();
+    setInterval(updateText, 3000);
 }
 
 // Cleanup function
