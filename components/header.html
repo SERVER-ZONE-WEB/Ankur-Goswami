@@ -1,16 +1,46 @@
 <header class="site-header">
-  <div class="logo">
-    <a href="/">Ankur Goswami</a>
-  </div>
-  <nav class="main-nav">
-    <ul>
-      <li><a href="/" data-nav="home">Home</a></li>
-      <li><a href="/about.html" data-nav="about">About</a></li>
-      <li><a href="/projects.html" data-nav="projects">Projects</a></li>
-      <li><a href="https://blog.example.com" target="_blank" rel="noopener">Blog</a></li>
-    </ul>
+  <a href="/" class="logo">
+    <img src="/assets/img/logo.svg" alt="Ankur Goswami">
+    <span>Ankur Goswami</span>
+  </a>
+  
+  <nav>
+    <button class="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <div class="nav-links">
+      <a href="/" class="nav-link" data-nav="home">Home</a>
+      <a href="/about.html" class="nav-link" data-nav="about">About</a>
+      <a href="/projects.html" class="nav-link" data-nav="projects">Projects</a>
+      <a href="https://blog.example.com" class="nav-link" target="_blank" rel="noopener">Blog</a>
+    </div>
   </nav>
-  <button class="mobile-menu" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </header>
+
+<script>
+  // Toggle mobile menu
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks?.classList.toggle('active');
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.site-header')) {
+      hamburger?.classList.remove('active');
+      navLinks?.classList.remove('active');
+    }
+  });
+
+  // Add scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('.site-header')
+      ?.classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>

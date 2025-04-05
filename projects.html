@@ -4,52 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Ankur Goswami</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
     <div id="header"></div>
 
-    <main>
-        <section class="projects-section">
-            <div class="container">
-                <h2>Security Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card" data-category="security">
-                        <!-- Project content -->
-                    </div>
-                    <!-- Add more security projects -->
-                </div>
-
-                <h2>Web Development</h2>
-                <div class="project-grid">
-                    <div class="project-card" data-category="web-dev">
-                        <!-- Project content -->
-                    </div>
-                    <!-- Add more web-dev projects -->
-                </div>
-
-                <h2>Research Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card" data-category="research">
-                        <!-- Project content -->
-                    </div>
-                    <!-- Add more research projects -->
-                </div>
+    <main class="projects-container">
+        <div class="container">
+            <h1 class="text-gradient">My Projects</h1>
+            
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="app">Apps</button>
             </div>
-        </section>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded dynamically -->
+            </div>
+        </div>
     </main>
 
     <div id="footer"></div>
 
+    <script src="assets/js/loadProjects.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#header").load("components/header.html");
-            $("#footer").load("components/footer.html");
+        document.addEventListener('DOMContentLoaded', () => {
+            // Filter functionality
+            const filters = document.querySelectorAll('.filter-btn');
+            filters.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filters.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+                    filterProjects(filter);
+                });
+            });
         });
     </script>
-    <script src="js/script.js"></script>
 </body>
 </html>
