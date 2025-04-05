@@ -1,0 +1,14 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Project One",
+      "description": "A modern web application built with React",
+      "image": "assets/img/project1.jpg",
+      "category": "web",
+      "technologies": ["React", "Node.js", "MongoDB"],
+      "githubUrl": "https://github.com/username/project1",
+      "liveUrl": "https://project1.example.com"
+    }
+  ]
+}

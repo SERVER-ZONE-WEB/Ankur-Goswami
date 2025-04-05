@@ -5,16 +5,17 @@ ANKUR-GOSWAMI/
 ├── policies.html
 ├── assets/
 │   ├── css/
-│   │   └── style.css
+│   │   ├── main.css
+│   │   └── policies.css
 │   ├── js/
-│   │   ├── include.js       # Inject header/footer
-│   │   └── main.js
-│   ├── img/
-│   │   └── profile.jpg
-├── components/
-│   ├── header.html
-│   └── footer.html
+│   │   ├── main.js           # Inject header/footer
+│   │   ├── loadProjects.js
+│   │   └── includeComponents.js
+│   └── img/
 ├── data/
-│   └── projects.json        # For dynamic projects
+│   └── projects.json      # For dynamic projects
+├── components/
+│   ├── header.html      ← Include external blog link here (target="_blank")
+│   └── footer.html
 ├── README.md
 └── .gitignore
