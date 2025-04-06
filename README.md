@@ -52,11 +52,13 @@ ANKUR-GOSWAMI/
 **Ankur Goswami**
 - GitHub: [@codewithchiru](https://github.com/codewithchiru)
 - LinkedIn: [@codewithchiru](https://linkedin.com/in/codewithchiru)
+- Website: [skillnexa.org](https://skillnexa.org)
 
 ## 📞 Contact
 
 For any queries or support:
-- Email: contact@serverzone.com
+- Email: contact@skillnexa.org
+- Website: https://skillnexa.org
 - Location: Server Zone HQ, Haridwar, Uttarakhand, India
 
 ---
