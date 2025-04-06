@@ -32,27 +32,27 @@ async function loadComponentWithRetry(elementId, componentPath, maxRetries = 3) 
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Get the repository name for GitHub Pages
-    const isGitHubPages = window.location.hostname.includes('github.io');
-    const basePath = isGitHubPages ? '/SERVER-ZONE-WEB/Ankur-Goswami' : '';
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Load header
+        const headerResponse = await fetch('../components/header.html');
+        const headerContent = await headerResponse.text();
+        document.getElementById('header').innerHTML = headerContent;
 
-    async function loadComponent(elementId, componentPath) {
-        const element = document.getElementById(elementId);
-        if (!element) return;
+        // Load footer
+        const footerResponse = await fetch('../components/footer.html');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer').innerHTML = footerContent;
 
-        try {
-            const response = await fetch(`${basePath}${componentPath}`);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            const html = await response.text();
-            element.innerHTML = html;
-        } catch (error) {
-            console.error(`Error loading ${elementId}:`, error);
-            element.innerHTML = `<div class="error-component">Failed to load ${elementId}</div>`;
-        }
+        // Initialize any component-specific scripts
+        const headerScript = document.createElement('script');
+        headerScript.src = '../components/header.js';
+        document.body.appendChild(headerScript);
+
+        const footerScript = document.createElement('script');
+        footerScript.src = '../components/footer.js';
+        document.body.appendChild(footerScript);
+    } catch (error) {
+        console.error('Error loading components:', error);
     }
-
-    // Load header and footer with correct paths
-    loadComponent('header', '/components/header.html');
-    loadComponent('footer', '/components/footer.html');
 });

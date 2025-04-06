@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Ankur Goswami</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <title>Projects - SERVER ZONE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Fix component paths -->
     <link rel="stylesheet" href="../components/header.css">
     <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -66,33 +67,17 @@
 
     <div id="footer-container"></div>
 
-    <!-- Core Scripts -->
+    <!-- Fix script paths and order -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/assets/js/includeComponents.js"></script>
-    <script src="/assets/js/loadProjects.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-    </script>
-    <script src="../components/header.js" defer></script>
-    <script src="../components/footer.js" defer></script>
-    <script src="./assets/js/main.js" defer></script>
-    <script src="./assets/js/animations.js" defer></script>
-    <script src="./assets/js/loadProjects.js" defer></script>
-    <script src="/assets/js/includeComponents.js" defer></script>
-    <script src="./assets/js/policies.js" defer></script>
-    <script>
-        // Load the header and footer
         $(document).ready(function() {
-            $("#header-container").load("components/header.html");
-            $("#footer-container").load("components/footer.html", function() {
-                // Set the current year in the footer
-                const year = new Date().getFullYear();
-                $("#year").text(year);
-            });
+            $("#header-container").load("../components/header.html");
+            $("#footer-container").load("../components/footer.html");
         });
     </script>
+    <script src="../components/header.js"></script>
+    <script src="../components/footer.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/projects.js"></script>
 </body>
 </html>
