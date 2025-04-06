@@ -1,5 +1,5 @@
 [build]
-  publish = "public"
+  publish = "doc"
   command = "# no build command needed"
 
 [[redirects]]
