@@ -1,79 +1,77 @@
+<link rel="stylesheet" href="/components/footer.css">
+
 <footer class="site-footer">
-    <div class="footer-main">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Social Media -->
-                <div class="footer-section social-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/username" target="_blank" rel="noopener" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/username" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://twitter.com/username" target="_blank" rel="noopener" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://youtube.com/username" target="_blank" rel="noopener" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Resources -->
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/documentation">Documentation</a></li>
-                        <li><a href="/tutorials">Tutorials</a></li>
-                        <li><a href="/guides">Guides</a></li>
-                    </ul>
-                </div>
-
-                <!-- Services -->
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="/security">Security Audit</a></li>
-                        <li><a href="/consulting">Consulting</a></li>
-                        <li><a href="/training">Training</a></li>
-                        <li><a href="/development">Development</a></li>
-                    </ul>
-                </div>
-
-                <!-- Company -->
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="public\about.html">About Us</a></li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/press">Press</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+  <div class="footer-container">
+    <!-- About Section -->
+    <div class="footer-section about">
+      <div class="brand">
+        <a href="/public/index.html" class="brand-link">
+          <img 
+            src="../assets/img/icons/company/logo.png" 
+            alt="SERVER ZONE" 
+            class="footer-logo"
+            onerror="this.onerror=null; this.src='../assets/img/default-logo.png';"
+          >
+          <h3>SERVER ZONE</h3>
+        </a>
+      </div>
+      <p>Full Stack Developer specializing in modern web technologies and creative solutions.</p>
+      <div class="social-links">
+        <a href="https://github.com/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:contact@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
     </div>
 
-    <!-- Sub Footer -->
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="footer-bottom-content">
-                <div class="footer-legal">
-                    <a href="/public/policies.html">Privacy Policy</a>
-                    <a href="/terms">Terms of Service</a>
-                    <a href="/cookies">Cookie Settings</a>
-                </div>
-                <div class="footer-copyright">
-                    <p>&copy; <span id="year"></span> Ankur Goswami. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
+    <!-- Quick Links -->
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+      <nav>
+        <a href="/public/projects.html">Projects</a>
+        <a href="/public/about.html">About Me</a>
+        <a href="/public/blog.html">Blog</a>
+        <a href="/public/contact.html">Contact</a>
+      </nav>
     </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section contact">
+      <h3>Contact Info</h3>
+      <a href="https://maps.app.goo.gl/Rp4SamZMkiuVc5zu9" target="_blank" rel="noopener" class="contact-link address-link">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="address-content">
+          <span>Inderlok Colony</span>
+          <span>Near Auto Stand, Shivalik Nagar</span>
+          <span>Sidcul Road, BHEL Township</span>
+          <span>Haridwar, Uttarakhand - 249403</span>
+        </div>
+        <div class="map-preview">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.703165137336!2d78.0707493!3d29.9461361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390947278c1c0ba7%3A0x9ef428333afd2c6e!2sShivalik%20Nagar%2C%20BHEL%20Township%2C%20Haridwar%2C%20Uttarakhand%20249403!5e0!3m2!1sen!2sin!4v1689825827428!5m2!1sen!2sin"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </a>
+      <a href="mailto:contact@example.com" class="contact-link">
+        <i class="fas fa-envelope"></i> contact@serverzone.com
+      </a>
+      <a href="tel:+911234567890" class="contact-link">
+        <i class="fas fa-phone"></i> +91 9456765279
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Ankur Goswami | All Rights Reserved</p>
+    <button id="scroll-top" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </div>
 </footer>
 
+<script src="/components/footer.js"></script>
 <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 </script>

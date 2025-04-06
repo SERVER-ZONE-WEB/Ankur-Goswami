@@ -1,56 +1,240 @@
 .site-footer {
-  background: #1a1a1a;
+  background: linear-gradient(to right, #1a1a1a, #2d2d2d);
   color: #fff;
-  padding: 3rem 2rem 1rem;
-  margin-top: auto;
+  padding: 4rem 0 0;
+  position: relative;
 }
 
-.footer-content {
+.footer-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
 }
 
 .footer-section {
+  margin-bottom: 2rem;
+}
+
+.footer-section.about .brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 1rem;
-}
-
-.footer-logo {
-  height: 50px;
-}
-
-.footer-section h3 {
-  color: #fff;
   margin-bottom: 1rem;
 }
 
-.footer-section a {
-  color: #aaa;
-  text-decoration: none;
-  transition: color 0.3s;
+.footer-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  /* Remove the filter that was making it white */
+  /* filter: brightness(0) invert(1); */
+  display: block;
+  max-width: 100%;
 }
 
-.footer-section a:hover {
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand h3 {
   color: #fff;
+  margin: 0;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.brand-link:hover {
+  opacity: 0.8;
 }
 
 .social-links {
   display: flex;
   gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-.social-links i {
-  font-size: 1.5rem;
+.social-links a {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.8rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: #007bff;
+  transform: translateY(-3px);
+}
+
+.footer-section h3 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background: #007bff;
+}
+
+.footer-section.links nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-section a {
+  color: #ccc;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #007bff;
+  padding-left: 5px;
+}
+
+.footer-section.contact p {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-section.contact i {
+  color: #007bff;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ccc;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.contact-link:hover {
+  color: #fff;
+  padding-left: 5px;
+}
+
+.contact-link br {
+  display: block;
+  content: "";
+  margin-top: 5px;
+}
+
+.map-preview {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 300px;
+  height: 200px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.map-preview iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.contact-link:hover .map-preview {
+  display: block;
+}
+
+.address-link {
+  align-items: flex-start;
+  padding: 8px 0;
+}
+
+.address-link i {
+  margin-top: 4px;
+}
+
+.address-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.address-content span {
+  display: block;
+  line-height: 1.4;
 }
 
 .footer-bottom {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #333;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem 0;
+  margin-top: 3rem;
   text-align: center;
-  color: #666;
+  position: relative;
+}
+
+#scroll-top {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  background: #007bff;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#scroll-top:hover {
+  background: #0056b3;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-section.about .brand {
+    justify-content: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-section.contact p {
+    justify-content: center;
+  }
 }
